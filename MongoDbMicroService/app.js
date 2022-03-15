@@ -18,5 +18,5 @@ app.use(
 app.use("/user", userRouter);
 
 app.listen(PORT, () => {
-  console.log(`server is running on PORT : 3000`);
+  console.log(`server is running on PORT : ${PORT}`);
 });
