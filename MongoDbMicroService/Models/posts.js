@@ -39,9 +39,11 @@ const PostsScheme = new Scheme({
         default : 0
     },
     postComments : [
+        
         {
             type : mongoose.Schema.Types.ObjectID,
             ref : 'postCommentsScheme' 
+            
         }
     ]
 

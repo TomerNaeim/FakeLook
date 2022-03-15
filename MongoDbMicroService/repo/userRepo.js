@@ -15,6 +15,11 @@ module.exports = class UserRep {
           return user;
              
       }
+      async getUserByIdRep(body)
+      {
+          let user = await this.getUserByID(body.id)
+          return user;
+      }
       
 
 
@@ -34,6 +39,11 @@ module.exports = class UserRep {
             });
             await user.save();
             return user;
+        }
+        async getUserByID (id)
+        {
+            let result  = await User.findById(id)
+            return result;
         }
 
 }
