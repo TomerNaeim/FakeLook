@@ -1,18 +1,18 @@
-const User = require('../models/user')
+const Posts = require('../models/posts')
 const container = require('../configContainer');
 mongoose = container.resolve('mongoose');
 
 
-module.exports = class UserRep {
+module.exports = class PostsRepo {
 //OutSide Function to export Outside
-    async addUserRep(body){
+    async addPostRep(body){
 
         console.log(body);
-        let user =   await this.addUser(body.userName, body.userPassword,
-              body.emailAdress, 
-              body.profileIMG
+        let post =   await this.addPost(body.tags, body.userUploaded,
+              body.uploadedLocation, body.dateUploaded,body.userRefrenses, 
+              body.picture,body.postLikes,body.postComments
              );
-          return user;
+          return post;
              
       }
       
@@ -22,18 +22,27 @@ module.exports = class UserRep {
 
 // Inside Functions 
 
-    async addUser(userName,userPassword,emailAdress,profileIMG
+    async addPost(tags,userUploaded,
+        uploadedLocation, dateUploaded,userRefrenses, 
+        picture,picturepostLikes,postComments
+       
         ) {
            
-            let user = new User({
-                userName : userName,
-                userPassword : userPassword,
-                emailAdress : emailAdress,
-                profileIMG : profileIMG,
+            let post = new Posts({
+                tags : tags,
+                userUploaded : userUploaded,
+                uploadedLocation : uploadedLocation,
+                dateUploaded : dateUploaded,
+                userRefrenses : userRefrenses ,
+                picture : picture,
+                postLikes : picturepostLikes,
+                postComments : postComments
+
+
                
             });
-            await user.save();
-            return user;
+            await post.save();
+            return post;
         }
 
 }
