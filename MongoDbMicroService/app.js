@@ -25,3 +25,13 @@ app.use("/postComment", postComment);
 app.listen(PORT, () => {
   console.log(`server is running on PORT : ${PORT}`);
 });
+
+
+//Update in MongoDb
+// async updateCompany(id,companyName
+//     ) {
+        
+//         await Company.updateOne({_id:id},{
+//             companyName :companyName
+//         });
+//     }

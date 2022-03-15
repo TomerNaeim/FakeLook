@@ -12,10 +12,10 @@ module.exports = class PostComments {
 
   // Inside Functions
 
-  async addPostComments(comment, usrId) {
+  async addPostComments(comment, userId) {
     let postComment = new PostComment({
       comment: comment,
-      userId: userId[""],
+      userId: userId,
     });
     await postComment.save();
     return postComment;
