@@ -27,6 +27,9 @@ app.listen(PORT, () => {
 });
 
 
+//Make for Friends,groupFriend,PostComments DELET,GETBYID,UPDATE,GETALL,ADD
+
+
 //Update in MongoDb
 // async updateCompany(id,companyName
 //     ) {
