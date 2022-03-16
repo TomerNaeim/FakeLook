@@ -1,11 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const userRep = require("../repo/userRepo");
+const friendRep = require("../repo/friendRepo");
 
 router.post("/addUser", async (req, res) => {
   let userrep = new userRep();
+  let friendRepo = new friendRep();
+  let newFriendID = await friendRepo.addFriendRep()
   console.log(req.body);
-  let result = await userrep.addUserRep(req.body);
+  let result = await userrep.addUserRep(req.body,newFriendID);
   console.log(result);
   res.send(result);
 });

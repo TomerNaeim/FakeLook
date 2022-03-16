@@ -22,6 +22,10 @@ const UserScheme = new Scheme({
         type: String,
         required: [true, 'Img adress is required'],
         default: ''
+    },
+    friendsCollectionFK : {
+        type : mongoose.Schema.Types.ObjectID,
+        ref : 'FriendScheme'
     }
 
 });
