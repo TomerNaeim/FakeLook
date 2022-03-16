@@ -10,4 +10,24 @@ router.post("/add", async (req, res) => {
   res.send(result);
 });
 
+router.get("/list", async (req, res) => {
+  let groupfriendsRepo = new groupfriendsRep();
+  let result = await groupfriendsRepo.allGroupFriendsRep(req.body);
+  // console.log(result);
+  res.send(result);
+});
+router.get("/list/:id", async (req, res) => {
+  let groupfriendsRepo = new groupfriendsRep();
+  let result = await groupfriendsRepo.byIdGroupFriendsRep(req.params.id);
+  //console.log(result);
+  res.send(result);
+});
+
+router.delete("/list/:id", async (req, res) => {
+  let groupfriendsRepo = new groupfriendsRep();
+  let result = await groupfriendsRepo.deleteByIdGroupFriendsRep(req.params.id);
+  console.log(result);
+  res.send(result);
+});
+
 module.exports = router;
