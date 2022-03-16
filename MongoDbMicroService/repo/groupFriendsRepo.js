@@ -62,6 +62,7 @@ module.exports = class GroupFriends {
     return groupFriend;
   }
   async UpdateByIdGroupFriends(id, groupName, friendsGroup) {
+      console.log(id);
     let groupFriend = await GroupFriend.updateOne(
       { _id: id },
       {

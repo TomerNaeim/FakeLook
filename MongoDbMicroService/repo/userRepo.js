@@ -39,12 +39,12 @@ module.exports = class UserRep {
 // Inside Functions 
 
     async allUser() {
-    let user = await user.find();
+    let user = await User.find();
     return user;
   }
 
     async deleteUserById(id) {
-    let user = await user.findByIdAndDelete(id);
+    let user = await User.findByIdAndDelete(id);
     return user;
     }
 

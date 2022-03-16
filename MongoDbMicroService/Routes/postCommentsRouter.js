@@ -1,36 +1,37 @@
 const express = require("express");
 const router = express.Router();
-const commentRep = require("../repo/postCommentsRepo");
+const container = require("../repContainer");
+const commentsRepository = container.resolve('PostCommentRep');
 
 router.post("/add", async (req, res) => {
-  let commentRepo = new commentRep();
+ 
   console.log(req.body);
-  let result = await commentRepo.addPostCommentRep(req.body);
+  let result = await commentsRepository.addPostCommentRep(req.body);
   console.log(result);
   res.send(result);
 });
 router.get("/list", async (req, res) => {
-  let commentRepo = new commentRep();
-  let result = await commentRepo.allPostCommentRep(req.body);
+
+  let result = await commentsRepository.allPostCommentRep(req.body);
   console.log(result);
   res.send(result);
 });
 
 router.get("/list", async (req, res) => {
-  let result = await commentRepo.byIdPostCommentRep(req.body);
+  let result = await commentsRepository.byIdPostCommentRep(req.body);
   console.log(result);
   res.send(result);
 });
 
 router.delete("/list/:id", async (req, res) => {
-  let result = await commentRepo.deleteByIdPostCommentRep(req.body);
+  let result = await commentsRepository.deleteByIdPostCommentRep(req.body);
   console.log(result);
   res.send(result);
 });
 
 router.put("/update", async (req, res) => {
   console.log("route");
-  let result = await commentRepo.UpdateByIdPostCommentRep(req.body);
+  let result = await commentsRepository.UpdateByIdPostCommentRep(req.body);
   console.log(result);
   res.send(result);
 });

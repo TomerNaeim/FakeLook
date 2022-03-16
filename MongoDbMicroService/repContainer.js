@@ -1,4 +1,4 @@
-const container = require('./containerConfig');
+const container = require('./configContainer');
 const awilix = require('awilix');
 const friendRep = require('./repo/friendRepo');
 const groupFriendRep = require('./repo/groupFriendsRepo');

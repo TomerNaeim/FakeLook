@@ -29,8 +29,9 @@ module.exports = class PostComments {
   async UpdateByIdPostCommentRep(body) {
     console.log("here");
     let postComments = await this.UpdateByIdPostComment(
-      body.idbody.comment,
-      body.userId
+        body.id,
+        body.comment,
+        body.userId
     );
     return postComments;
   }
