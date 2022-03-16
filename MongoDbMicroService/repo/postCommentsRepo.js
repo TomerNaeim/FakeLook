@@ -15,13 +15,11 @@ module.exports = class PostComments {
     return postComments;
   }
   async byIdPostCommentRep(body) {
-    console.log(id);
     let postComments = await this.byIdPostComments(body.id);
     return postComments;
   }
 
   async deleteByIdPostCommentRep(body) {
-    console.log(id);
     let postComments = await this.deleteByIdPostComments(body.id);
     return postComments;
   }
@@ -29,9 +27,9 @@ module.exports = class PostComments {
   async UpdateByIdPostCommentRep(body) {
     console.log("here");
     let postComments = await this.UpdateByIdPostComment(
-        body.id,
-        body.comment,
-        body.userId
+      body.id,
+      body.comment,
+      body.userId
     );
     return postComments;
   }
