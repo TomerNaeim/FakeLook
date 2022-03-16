@@ -38,4 +38,14 @@ module.exports = class FriendRep {
     let friends = await friends.findById(id);
     return friends;
   }
+
+  async deleteByIdFriendsRep(id) {
+    let friends = await this.deleteByIdFriends(id);
+    return friends;
+  }
+
+  async deleteByIdFriends(id) {
+    let friends = await friends.findByIdAndDelete(id);
+    return friends;
+  }
 };

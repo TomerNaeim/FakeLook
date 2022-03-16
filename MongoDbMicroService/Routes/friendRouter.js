@@ -23,4 +23,10 @@ router.get("/list/:id", async (req, res) => {
   console.log(result);
   res.send(result);
 });
+router.delete("/list/:id", async (req, res) => {
+  let friendsRepo = new friendRep();
+  let result = await friendsRepo.byIdFriendsRep(req.params.id);
+  console.log(result);
+  res.send(result);
+});
 module.exports = router;

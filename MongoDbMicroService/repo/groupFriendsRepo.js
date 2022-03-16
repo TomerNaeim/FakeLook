@@ -52,14 +52,4 @@ module.exports = class GroupFriends {
     let groupFriend = await GroupFriend.findByIdAndDelete(id);
     return groupFriend;
   }
-
-  async updateByIdGroupFriendsRep(id, body) {
-    let groupFriend = await this.updateByIdGroupFriends(id, body);
-    return groupFriend;
-  }
-
-  async updateByIdGroupFriends(id) {
-    let groupFriend = await GroupFriend.findByIdAndUpdate(id);
-    return groupFriend;
-  }
 };
