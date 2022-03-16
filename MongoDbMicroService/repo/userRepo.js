@@ -5,12 +5,12 @@ mongoose = container.resolve('mongoose');
 
 module.exports = class UserRep {
 //OutSide Function to export Outside
-    async addUserRep(body){
+    async addUserRep(body,newFriendID){
 
-        console.log(body);
+        console.log(newFriendID);
         let user =   await this.addUser(body.userName, body.userPassword,
               body.emailAdress, 
-              body.profileIMG
+              body.profileIMG,newFriendID
              );
           return user;
              
@@ -48,14 +48,16 @@ module.exports = class UserRep {
     return user;
     }
 
-    async addUser(userName,userPassword,emailAdress,profileIMG
-        ) {
+    async addUser(userName,userPassword,emailAdress,profileIMG,newFriendID
+        ) 
+        {
            
             let user = new User({
                 userName : userName,
                 userPassword : userPassword,
                 emailAdress : emailAdress,
                 profileIMG : profileIMG,
+                friendsCollectionFK : newFriendID
                
             });
             await user.save();

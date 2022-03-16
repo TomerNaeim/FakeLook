@@ -6,8 +6,8 @@ module.exports = class FriendRep {
   //OutSide Function to export Outside
   async addFriendRep(body) {
     console.log(body);
-    let friend = await this.addFriend(body.friendsCollection);
-    return friend;
+    let friend = await this.addFriend();
+    return friend._id;
   }
 
   async allFriendRep() {
@@ -33,9 +33,9 @@ module.exports = class FriendRep {
 
   // Inside Functions
 
-  async addFriend(friendsCollection) {
+  async addFriend() {
     let friend = new Friend({
-      friendsCollection: friendsCollection,
+      friendsCollection: [],
     });
     await friend.save();
     return friend;
