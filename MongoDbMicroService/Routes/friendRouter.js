@@ -10,16 +10,16 @@ router.post("/addFriend", async (req, res) => {
   res.send(result);
 });
 
-router.get("/list", async (req, res) => {
+router.get("/getAll", async (req, res) => {
   let friendsRepo = new friendRep();
   let result = await friendsRepo.allFriendRep(req.body);
   console.log(result);
   res.send(result);
 });
 
-router.get("/list/:id", async (req, res) => {
+router.post("/list", async (req, res) => {  //loaclhost3002/friend ,{id:54545454}
   let friendsRepo = new friendRep();
-  let result = await friendsRepo.byIdFriendsRep(req.params.id);
+  let result = await friendsRepo.byIdFriendsRep(req.body);
   console.log(result);
   res.send(result);
 });

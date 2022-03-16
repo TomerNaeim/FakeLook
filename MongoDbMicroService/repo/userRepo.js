@@ -20,12 +20,33 @@ module.exports = class UserRep {
           let user = await this.getUserByID(body.id)
           return user;
       }
+      async getallUserRep() {
+        let users = await this.allUser();
+        return users;
+      }
+    
+    
+      async deleteByIdFriendsRep(id) {
+        let user = await this.deleteUserById(id);
+        return user;
+      }
+    
       
 
 
 
 
 // Inside Functions 
+
+    async allUser() {
+    let user = await user.find();
+    return user;
+  }
+
+    async deleteUserById(id) {
+    let user = await user.findByIdAndDelete(id);
+    return user;
+    }
 
     async addUser(userName,userPassword,emailAdress,profileIMG
         ) {
