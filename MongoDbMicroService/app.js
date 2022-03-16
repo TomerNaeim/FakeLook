@@ -7,6 +7,7 @@ const userRouter = require("./Routes/userRouter");
 const postRouter = require("./Routes/postsRouter");
 const groupF = require("./Routes/groupFriendsRouter");
 const postComment = require("./Routes/postCommentsRouter");
+const friendRouter = require("./Routes/friendRouter");
 const PORT = config.get("serverPort.port");
 const origin = config.get("serverPort.originAllowed");
 const app = express();
@@ -17,6 +18,7 @@ app.use(
     origin: origin,
   })
 );
+app.use("/friend", friendRouter);
 app.use("/user", userRouter);
 app.use("/post", postRouter);
 app.use("/groupFriends", groupF);
@@ -26,14 +28,12 @@ app.listen(PORT, () => {
   console.log(`server is running on PORT : ${PORT}`);
 });
 
-
 //Make for Friends,groupFriend,PostComments DELET,GETBYID,UPDATE,GETALL,ADD
-
 
 //Update in MongoDb
 // async updateCompany(id,companyName
 //     ) {
-        
+
 //         await Company.updateOne({_id:id},{
 //             companyName :companyName
 //         });

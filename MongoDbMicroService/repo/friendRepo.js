@@ -1,39 +1,41 @@
-const User = require('../models/user')
-const container = require('../configContainer');
-mongoose = container.resolve('mongoose');
+const Friend = require("../models/friend");
+const container = require("../configContainer");
+mongoose = container.resolve("mongoose");
 
+module.exports = class FriendRep {
+  //OutSide Function to export Outside
+  async addFriendRep(body) {
+    console.log(body);
+    let friend = await this.addFriend(body.friendsCollection);
+    return friend;
+  }
 
-module.exports = class UserRep {
-//OutSide Function to export Outside
-    async addUserRep(body){
+  // Inside Functions
 
-        console.log(body);
-        let user =   await this.addUser(body.userName, body.userPassword,
-              body.emailAdress, 
-              body.profileIMG
-             );
-          return user;
-             
-      }
-      
+  async addFriend(friendsCollection) {
+    let friend = new Friend({
+      friendsCollection: friendsCollection[""],
+    });
+    await friend.save();
+    return friend;
+  }
+  async allFriendRep() {
+    let friends = await this.allFriends();
+    return friends;
+  }
 
+  async allFriends() {
+    let friends = await Friend.find();
+    return friends;
+  }
 
+  async byIdFriendsRep(id) {
+    let friends = await this.byIdFriends(id);
+    return friends;
+  }
 
-
-// Inside Functions 
-
-    async addUser(userName,userPassword,emailAdress,profileIMG
-        ) {
-           
-            let user = new User({
-                userName : userName,
-                userPassword : userPassword,
-                emailAdress : emailAdress,
-                profileIMG : profileIMG,
-               
-            });
-            await user.save();
-            return user;
-        }
-
-}
+  async byIdFriends(id) {
+    let friends = await friends.findById(id);
+    return friends;
+  }
+};
