@@ -16,14 +16,21 @@ router.get("/list", async (req, res) => {
   res.send(result);
 });
 
-router.get("/list/:id", async (req, res) => {
-  let result = await commentRepo.byIdPostCommentRep(req.params.id);
+router.get("/list", async (req, res) => {
+  let result = await commentRepo.byIdPostCommentRep(req.body);
   console.log(result);
   res.send(result);
 });
 
 router.delete("/list/:id", async (req, res) => {
-  let result = await commentRepo.deleteByIdPostComments(req.params.id);
+  let result = await commentRepo.deleteByIdPostCommentRep(req.body);
+  console.log(result);
+  res.send(result);
+});
+
+router.put("/update", async (req, res) => {
+  console.log("route");
+  let result = await commentRepo.UpdateByIdPostCommentRep(req.body);
   console.log(result);
   res.send(result);
 });

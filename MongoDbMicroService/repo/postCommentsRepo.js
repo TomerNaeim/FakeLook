@@ -10,6 +10,30 @@ module.exports = class PostComments {
     return postComments;
   }
 
+  async allPostCommentRep() {
+    let postComments = await this.allPostComments();
+    return postComments;
+  }
+  async byIdPostCommentRep(body) {
+    console.log(id);
+    let postComments = await this.byIdPostComments(body.id);
+    return postComments;
+  }
+
+  async deleteByIdPostCommentRep(body) {
+    console.log(id);
+    let postComments = await this.deleteByIdPostComments(body.id);
+    return postComments;
+  }
+
+  async UpdateByIdPostCommentRep(body) {
+    console.log("here");
+    let postComments = await this.UpdateByIdPostComment(
+      body.idbody.comment,
+      body.userId
+    );
+    return postComments;
+  }
   // Inside Functions
 
   async addPostComments(comment, userId) {
@@ -21,18 +45,8 @@ module.exports = class PostComments {
     return postComment;
   }
 
-  async allPostCommentRep() {
-    let postComments = await this.allPostComments();
-    return postComments;
-  }
-
   async allPostComments() {
     let postComments = await PostComment.find();
-    return postComments;
-  }
-  async byIdPostCommentRep(id) {
-    console.log(id);
-    let postComments = await this.byIdPostComments(id);
     return postComments;
   }
 
@@ -41,14 +55,19 @@ module.exports = class PostComments {
     return postComments;
   }
 
-  async deleteByIdPostCommentRep(id) {
-    console.log(id);
-    let postComments = await this.deleteByIdPostComments(id);
+  async deleteByIdPostComments(id) {
+    let postComments = await PostComment.findByIdAndDelete(id);
     return postComments;
   }
 
-  async deleteByIdPostComments(id) {
-    let postComments = await PostComment.findByIdAndDelete(id);
+  async UpdateByIdPostComment(id, comment, userId) {
+    let postComments = await PostComment.updateOne(
+      { _id: id },
+      {
+        comment: comment,
+        userId: userId,
+      }
+    );
     return postComments;
   }
 };

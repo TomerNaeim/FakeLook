@@ -16,16 +16,24 @@ router.get("/list", async (req, res) => {
   // console.log(result);
   res.send(result);
 });
-router.get("/list/:id", async (req, res) => {
+router.post("/list/:id", async (req, res) => {
   let groupfriendsRepo = new groupfriendsRep();
-  let result = await groupfriendsRepo.byIdGroupFriendsRep(req.params.id);
+  let result = await groupfriendsRepo.byIdGroupFriendsRep(req.body);
   //console.log(result);
   res.send(result);
 });
 
 router.delete("/list/:id", async (req, res) => {
   let groupfriendsRepo = new groupfriendsRep();
-  let result = await groupfriendsRepo.deleteByIdGroupFriendsRep(req.params.id);
+  let result = await groupfriendsRepo.deleteByIdGroupFriendsRep(req.body);
+  console.log(result);
+  res.send(result);
+});
+
+router.put("/update", async (req, res) => {
+  console.log("in router");
+  let groupfriendsRepo = new groupfriendsRep();
+  let result = await groupfriendsRepo.UpdateByIdGroupFriendsRep(req.body);
   console.log(result);
   res.send(result);
 });

@@ -17,7 +17,8 @@ router.get("/getAll", async (req, res) => {
   res.send(result);
 });
 
-router.post("/list", async (req, res) => {  //loaclhost3002/friend ,{id:54545454}
+router.post("/list", async (req, res) => {
+  //loaclhost3002/friend ,{id:54545454}
   let friendsRepo = new friendRep();
   let result = await friendsRepo.byIdFriendsRep(req.body);
   console.log(result);
@@ -25,8 +26,15 @@ router.post("/list", async (req, res) => {  //loaclhost3002/friend ,{id:54545454
 });
 router.delete("/list/:id", async (req, res) => {
   let friendsRepo = new friendRep();
-  let result = await friendsRepo.byIdFriendsRep(req.params.id);
+  let result = await friendsRepo.byIdFriendsRep(req.body);
   console.log(result);
   res.send(result);
 });
+
+router.put("/update", async (req, res) => {
+  let result = await friendsRepo.UpdateByIdFriendsRep(req.body);
+  console.log(result);
+  res.send(result);
+});
+
 module.exports = router;

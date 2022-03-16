@@ -9,11 +9,24 @@ module.exports = class FriendRep {
     let friend = await this.addFriend(body.friendsCollection);
     return friend;
   }
+
   async allFriendRep() {
     let friends = await this.allFriends();
     return friends;
   }
+
+  async deleteByIdFriendsRep(body) {
+    let friends = await this.deleteByIdFriends(body.id);
+    return friends;
+  }
+
+  async UpdateByIdFriendsRep(body) {
+    let friends = await this.UpdateByIdFriends(body.id, body.friendsCollection);
+    return friends;
+  }
+
   async byIdFriendsRep(body) {
+    console.log(body.id);
     let friends = await this.byIdFriends(body.id);
     return friends;
   }
@@ -27,27 +40,27 @@ module.exports = class FriendRep {
     await friend.save();
     return friend;
   }
-  
-
   async allFriends() {
     let friends = await Friend.find();
     return friends;
   }
-
-  
-
   async byIdFriends(id) {
     let friends = await Friend.findById(id);
     return friends;
   }
 
-  async deleteByIdFriendsRep(id) {
-    let friends = await this.deleteByIdFriends(id);
+  async deleteByIdFriends(id) {
+    let friends = await Friend.findByIdAndDelete(id);
     return friends;
   }
 
-  async deleteByIdFriends(id) {
-    let friends = await Friend.findByIdAndDelete(id);
+  async UpdateByIdFriends(id, friendsCollection) {
+    let friends = await Friend.updateOne(
+      { _id: id },
+      {
+        friendsCollection: friendsCollection,
+      }
+    );
     return friends;
   }
 };
