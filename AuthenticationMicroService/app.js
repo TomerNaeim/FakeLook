@@ -25,5 +25,5 @@ app.listen(PORT, () => {
 });
 
 app.get('/authLogoGoogle', (req,res)=>{
-  res.send('<a href="/authGoogle/google">Authenticate with Google</a>');
+  res.send('<a href="/authGoogle/auth/google">Authenticate with Google</a>');
 })
