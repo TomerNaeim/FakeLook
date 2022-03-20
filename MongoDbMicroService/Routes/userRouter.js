@@ -32,5 +32,10 @@ router.delete("/delete", async (req, res) => {
   res.send(result);
 });
 
+router.post("/login",async(req, res)=>{
+  let result = await userRepository.loginRepo(req.body);
+  res.send(result)
+})
+
 
 module.exports = router;

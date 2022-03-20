@@ -4,6 +4,7 @@ const { check, validationResult } = require("express-validator");
 const JWT = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const axios = require('axios');
+const { response } = require("express");
 
 router.post(
   "/signup",
@@ -26,10 +27,8 @@ router.post(
     }
     console.log(email + "__"+ password);
     const ops = {email:email,password:password};
-    await axios.get('http://localhost:5000/user/getAll')
-    .then(response =>console.log(response))
-    .catch(error => console.log(error))
-
+    let result =  await axios.post('http://localhost:5000/user/login',ops)
+    
     // let user = users.find((user) => {
     //   return user.email === email;
     // });
