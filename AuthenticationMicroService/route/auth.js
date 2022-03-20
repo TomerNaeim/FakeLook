@@ -3,6 +3,7 @@ const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const JWT = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const axios = require('axios');
 
 router.post(
   "/signup",
@@ -23,10 +24,15 @@ router.post(
         errors: errors.array(),
       });
     }
+    console.log(email + "__"+ password);
+    const ops = {email:email,password:password};
+    await axios.get('http://localhost:5000/user/getAll')
+    .then(response =>console.log(response))
+    .catch(error => console.log(error))
 
-    let user = users.find((user) => {
-      return user.email === email;
-    });
+    // let user = users.find((user) => {
+    //   return user.email === email;
+    // });
 
     if (user) {
       return res.status(422).json({

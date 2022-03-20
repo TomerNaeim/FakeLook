@@ -1,11 +1,12 @@
 const express = require("express");
 const cors = require("cors");
-const PORT = config.get("serverPort.port");
-const origin = config.get("serverPort.originAllowed");
+
 const authRouter = require("./route/auth");
 const container = require("./configContainer");
-
 const config = container.resolve("config");
+const PORT = config.get("serverPort.port");
+const origin = config.get("serverPort.originAllowed");
+
 const app = express();
 app.use(express.json());
 app.use(
