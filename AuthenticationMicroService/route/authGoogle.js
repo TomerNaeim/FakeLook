@@ -36,7 +36,7 @@ passport.use(new GoogleStrategy({
     failureRedirect: '/auth/google/failure'
   })
 );
-router.get('/protected', isLoggedIn, (req, res) => {
+router.get('/protected', (req, res) => {
     res.send(`Hello ${req.user.displayName}`);
   });
   

@@ -1,23 +1,34 @@
-import React from "react";
+
 import { useState, useEffect } from "react";
 import api from"../services/loginServ"
 
-function loginPage() {
+const LoginPage =(props)=> {
 
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [googleLogo,setGoogleLogo] = useState();
 
   const login = async (data) => {
     await api.post("/login", data).then((response) => {
-    
-  })
+      console.log(response);
+    }
+    )};
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     console.log(email, password);
   };
+  useEffect(async ()=>{
+
+   let res = await api.get("http://localhost:5001/authLogoGoogle");
+   console.log(res);
+   setGoogleLogo(res.data.slice(9,27));
+  },[])
+ 
+ 
+ 
   return (
     <div className="login-wrapper">
       <h1> Log In</h1>
@@ -35,10 +46,11 @@ function loginPage() {
         </label>
         <div>
           <button type="submit">Submit</button>
+          <a href=''></a>
         </div>
       </form>
     </div>
   );
-}
+};
 
-export default loginPage;
+export default LoginPage;
