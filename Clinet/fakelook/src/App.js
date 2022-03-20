@@ -1,11 +1,15 @@
-
-import './App.css';
+import { Route, Switch } from "react-router-dom";
+import React from "react";
+import Login from "./Views/LoginPage/loginPage";
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+    <Switch>
+      <Route path="/" exact>
+        <Login />
+      </Route>
+    </Switch>
   );
 }
 
