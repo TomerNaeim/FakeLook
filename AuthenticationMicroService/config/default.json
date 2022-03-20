@@ -1,0 +1,9 @@
+{
+  "serverPort": {
+    "port": 5001,
+    "originAllowed": "*"
+  },
+  "db": {
+    "url": "mongodb+srv://tomer:tomer@fakelookdb.0i8r0.mongodb.net/fakelookdb?retryWrites=true&w=majority"
+  }
+}
