@@ -30,6 +30,12 @@ module.exports = class UserRep {
         let user = await this.deleteUserById(id);
         return user;
       }
+
+      async loginRepo(body) {
+          let result = await this.login(body.email,body.password)
+          return result;
+
+      }
     
       
 
@@ -37,6 +43,16 @@ module.exports = class UserRep {
 
 
 // Inside Functions 
+
+    async login(email,password)
+    {
+        let res = await User.findOne({emailAdress:email})
+        if (res)
+        {
+            console.log(res.userPassword); 
+            return true;
+        }
+    }
 
     async allUser() {
     let user = await User.find();
