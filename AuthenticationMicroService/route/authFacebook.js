@@ -27,12 +27,12 @@ function(token, refreshToken, profile, done) {
             failureRedirect : '/'
         }));
         passport.serializeUser(function(user, done) {
-            done(null, user);
+            done(null);
         });
         
         // used to deserialize the user
         passport.deserializeUser(function(id, done) {
-            return done(null,user)
+            return done(null)
         });
         
         router.get('/profile',(req,res) => {
