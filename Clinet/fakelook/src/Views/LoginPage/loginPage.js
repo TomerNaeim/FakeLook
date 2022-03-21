@@ -40,7 +40,7 @@ const LoginPage = (props) => {
   }, []);
 
   return (
-    <div className="login-wrapper">
+    <div>
       <h1> Log In</h1>
       <form onSubmit={handleSubmit}>
         <label>
