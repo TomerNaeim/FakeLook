@@ -56,7 +56,13 @@ const LoginPage = (props) => {
         </label>
         <div>
           <button type="submit">Submit</button>
+<<<<<<< HEAD
+        <a href="http://localhost:5001/authGoogle/auth/google">{googleLogo}</a>
+          
+        
+=======
           <a href="http://localhost:5001/authLogoGoogle">{googleLogo}</a>
+>>>>>>> 6b7369707d4bc5f6ece9d3a32a00f68aa1cb34e1
         </div>
       </form>
     </div>
