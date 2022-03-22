@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { check, validationResult } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 const JWT = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const axios = require("axios");
@@ -8,30 +8,30 @@ const { response, default: e } = require("express");
 
 router.post(
   "/signup",
-  //[
-  //  check("emailAdress", "Please input a valid email").isEmail(),
-  //  check(
-  //    "userPassword",
-  //    "Please input a password with a min length of 6"
-  //  ).isLength({ min: 6 }),
-  //],
+  body("email").isEmail(),
+  body("name").isLength({ min: 4 }),
+  body("password").isLength({ min: 6 }),
+
   async (req, res) => {
     const { name, email, password, img } = req.body;
 
-    //  const errors = validationResult(req);
+    const errors = validationResult(req);
 
-    // if (!errors.isEmpty()) {
-    // return res.status(422).json({
-    // errors: errors.array(),
-    //});
-    // }
-    const ops = {
-      userName: name,
-      emailAdress: email,
-      userPassword: password,
-      profileIMG: img,
-    };
-    let result = await axios.post("http://localhost:5000/user/addUser", ops);
+    if (!errors.isEmpty()) {
+      console.log(errors);
+      return res.status(422).json({
+        errors: errors.array(),
+      });
+    } else {
+      const ops = {
+        userName: name,
+        emailAdress: email,
+        userPassword: password,
+        profileIMG: img,
+      };
+      let result = await axios.post("http://localhost:5000/user/addUser", ops);
+      console.log(result);
+    }
 
     // let user = users.find((user) => {
     //   return user.email === email;
@@ -75,8 +75,10 @@ router.post("/login", async (req, res) => {
   // });
   if (result.data.userName != null) {
     console.log(result.data.userName);
+    res.send({ message: "welcom" });
   } else {
     console.log("llll");
+    res.send({ message: "one of the value not match" });
   }
 
   if (!result) {
@@ -103,12 +105,12 @@ router.post("/login", async (req, res) => {
   //}
 
   // Send JSON WEB TOKEN
-  const token = await JWT.sign({ email }, "nfb32iur32ibfqfvi3vf932bg932g932", {
-    expiresIn: 360000,
-  });
+  //const token = await JWT.sign({ email }, "nfb32iur32ibfqfvi3vf932bg932g932", {
+  //  expiresIn: 360000,
+  //});
 
-  res.json({
-    token,
-  });
+  // res.json({
+  //   token,
+  // });
 });
 module.exports = router;

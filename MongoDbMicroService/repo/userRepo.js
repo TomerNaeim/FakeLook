@@ -61,7 +61,7 @@ module.exports = class UserRep {
   async addUser(userName, userPassword, emailAdress, profileIMG, newFriendID) {
     User.findOne({ emailAdress: emailAdress }, (err, user) => {
       if (user) {
-        return "this email ulready register";
+        console.log("this email ulready register");
       } else {
         let user = new User({
           userName: userName,

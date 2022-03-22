@@ -21,19 +21,37 @@ const Register = () => {
   const [name, setName] = useState("");
   const [img, setImg] = useState("");
 
+  const validadte = () => {
+    if (!email.includes("@", ".com")) {
+      alert("invalid email");
+
+      return false;
+    }
+    if (name.length < 4) {
+      alert("invalid name you most minimum 4 letters   ");
+      return false;
+    }
+    if (password.length < 6) {
+      alert("invalid password you most minimum 6 letters ");
+      return false;
+    }
+    return true;
+  };
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
+    const isValid = validadte();
+    if (isValid) {
       const config = {
         headers: {
           "Content-type": "application/json",
         },
       };
 
-      const { data } = await api.post(
+      const { data } = api.post(
         "/signup",
         {
           name,
@@ -42,9 +60,10 @@ const Register = () => {
         },
         config
       );
-      localStorage.getItem("userInfo", JSON.stringify(data));
-    } catch (error) {}
 
+      //  navigate("/home");
+      console.log("here from register");
+    }
     // console.log(email, password);
   };
   return (
