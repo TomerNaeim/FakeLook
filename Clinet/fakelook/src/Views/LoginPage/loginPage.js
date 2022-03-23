@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import api from "../services/loginServ";
+import GoogleLoginComp from "./Componnets/googleLogin";
+import FacebookLogin from "./Componnets/facebookLogin"
 
 const LoginPage = (props) => {
   const [email, setEmail] = useState("");
@@ -33,10 +35,14 @@ const LoginPage = (props) => {
 
     console.log(email, password);
   };
-  useEffect(async () => {
-    let res = await api.get("http://localhost:5001/authLogoGoogle");
-    console.log(res);
-    setGoogleLogo(res.data.slice(9, 27));
+  useEffect(() =>{
+    console.log(localStorage.getItem('loginData'));
+    if(localStorage.getItem('loginData'))
+    {
+      //redirect to main menu with storage item
+       console.log('have token');
+    }
+   
   }, []);
 
   return (
@@ -56,13 +62,10 @@ const LoginPage = (props) => {
         </label>
         <div>
           <button type="submit">Submit</button>
-<<<<<<< HEAD
-        <a href="http://localhost:5001/authGoogle/auth/google">{googleLogo}</a>
-          
+        {/* <a href="http://localhost:5001/authGoogle/auth/google">{googleLogo}</a> */}
+          <GoogleLoginComp></GoogleLoginComp>
+          <FacebookLogin></FacebookLogin>
         
-=======
-          <a href="http://localhost:5001/authLogoGoogle">{googleLogo}</a>
->>>>>>> 6b7369707d4bc5f6ece9d3a32a00f68aa1cb34e1
         </div>
       </form>
     </div>
