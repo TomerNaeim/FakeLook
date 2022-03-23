@@ -1,7 +1,53 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-function mainPage(props) {
-  return <div>mainPage {localStorage.getItem('loginData')}</div>;
+import "../MainPage/MainPage.css";
+
+function MainPage() {
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
+  const [publishers, setPublishers] = useState("");
+  const [imageTags, SetImageTags] = useState("");
+  const [taggetUsers, SetTaggetUsers] = useState("");
+
+  const navigate = useNavigate();
+  const postPage = async () => {
+    navigate("/post");
+  };
+  return (
+    <div className="body">
+      <div className="container">
+        <div className="child1">
+          child1
+          <form>
+            <button onClick={postPage}>create new post</button>
+            <button>friends</button>
+            <br />
+            <label>date from</label>
+            <input type="date" onChange={(e) => setDateFrom(e.target.value)} />
+            <label>date to</label>
+            <input type="date" onChange={(e) => setDateTo(e.target.value)} />
+            <br />
+            <label>publishers:</label>
+            <input
+              type="text"
+              onChange={(e) => setPublishers(e.target.value)}
+            />
+            <label>image tags</label>
+            <input type="text" onChange={(e) => SetImageTags(e.target.value)} />
+            <br />
+            <label>tagget users</label>
+            <input
+              type="text"
+              onChange={(e) => SetTaggetUsers(e.target.value)}
+            />
+          </form>
+        </div>
+        <div>child2</div>
+      </div>
+    </div>
+  );
 }
 
-export default mainPage;
+export default MainPage;
