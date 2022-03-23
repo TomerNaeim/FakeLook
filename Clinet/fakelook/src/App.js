@@ -3,7 +3,7 @@ import { useState } from "react";
 import React from "react";
 import Login from "./Views/LoginPage/loginPage";
 import Register from "./Views/Register/Register";
-import MainPage from "./Views/MainPage/MainPage";
+import MainPage from "./Views/MainPage/mainPage";
 import Post from "./Views/Post/Post";
 
 function App() {
