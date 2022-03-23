@@ -47,10 +47,14 @@ const LoginPage = (props) => {
             },
             config
           )
-          .then((res) => alert(res.data.message));
+          .then((res) => {
+            alert(res.data.tokenMaker);
+             localStorage.setItem('loginData', JSON.stringify(res.data))
+            });
+         
         console.log(data);
 
-        //navigate("/home");
+        navigate("/home");
       } catch (error) {}
     }
 
@@ -62,6 +66,7 @@ const LoginPage = (props) => {
     {
       //redirect to main menu with storage item
        console.log('have token');
+      
     }
    
   }, []);

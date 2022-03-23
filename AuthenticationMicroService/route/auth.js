@@ -32,8 +32,76 @@ router.post(
       let result = await axios.post("http://localhost:5000/user/addUser", ops);
       console.log(result);
     }
+  }
+);
 
-    // let user = users.find((user) => {
+async function makeToken (id,name,email){
+  const token = await JWT.sign({name,email }, "nfb32iur32ibfqfvi3vf932bg932g932", {
+       expiresIn: 360000,
+      });
+      return token;
+}
+
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  // Check if user with email exists
+  console.log(email + "__" + password);
+  const ops = { email: email, password: password };
+  let result = await axios.post("http://localhost:5000/user/login", ops);
+  console.log(result.data);
+  // let user = users.find((user) => {
+  //   return user.email === email;
+  // });
+  let tokenMaker =await makeToken(result.data.userName,result.data.email);
+  if (result.data.userName != null) {
+    console.log(result.data.userName);
+    
+    res.json({ message: "welcom", name:result.data.userName, email:result.data.email, picture:result.data.profileIMG ,tokenMaker:tokenMaker});
+  } else {
+    console.log("llll");
+    res.send({ message: "one of the value not match" });
+  }
+
+  if (!result) {
+    return res.status(422).json({
+      errors: [
+        {
+          msg: "Invalid Credentials",
+        },
+      ],
+    });
+  }
+
+});
+module.exports = router;
+
+
+
+
+
+  // Check if the password if valid
+  //let isMatch = await bcrypt.compare(result.data.password);
+  //
+  //if (!isMatch) {
+  //  return res.status(404).json({
+  //    errors: [
+  //      {
+  //        msg: "Invalid Credentials",
+  //      },
+  //    ],
+  //  });
+  //}
+
+  // Send JSON WEB TOKEN
+  //const token = await JWT.sign({ email }, "nfb32iur32ibfqfvi3vf932bg932g932", {
+  //  expiresIn: 360000,
+  //});
+
+  // res.json({
+  //   token,
+  // });
+
+ // let user = users.find((user) => {
     //   return user.email === email;
     // });
 
@@ -60,57 +128,3 @@ router.post(
     // res.json({
     //   token,
     // });
-  }
-);
-
-router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-  // Check if user with email exists
-  console.log(email + "__" + password);
-  const ops = { email: email, password: password };
-  let result = await axios.post("http://localhost:5000/user/login", ops);
-  console.log(result.data);
-  // let user = users.find((user) => {
-  //   return user.email === email;
-  // });
-  if (result.data.userName != null) {
-    console.log(result.data.userName);
-    res.send({ message: "welcom" });
-  } else {
-    console.log("llll");
-    res.send({ message: "one of the value not match" });
-  }
-
-  if (!result) {
-    return res.status(422).json({
-      errors: [
-        {
-          msg: "Invalid Credentials",
-        },
-      ],
-    });
-  }
-
-  // Check if the password if valid
-  //let isMatch = await bcrypt.compare(result.data.password);
-  //
-  //if (!isMatch) {
-  //  return res.status(404).json({
-  //    errors: [
-  //      {
-  //        msg: "Invalid Credentials",
-  //      },
-  //    ],
-  //  });
-  //}
-
-  // Send JSON WEB TOKEN
-  //const token = await JWT.sign({ email }, "nfb32iur32ibfqfvi3vf932bg932g932", {
-  //  expiresIn: 360000,
-  //});
-
-  // res.json({
-  //   token,
-  // });
-});
-module.exports = router;

@@ -21,7 +21,7 @@ const GoogleLoginComp = (props)=>{
       };
     
       const handleLogin = async (temp) => {
-          console.log(temp.profileObj);
+          console.log(temp.tokenId);
         const res = await fetch('http://localhost:5001/gogRouter/api/google-login', {
           method: 'POST',
           body: JSON.stringify({
@@ -34,6 +34,7 @@ const GoogleLoginComp = (props)=>{
     console.log(res);
         const data = await res.json();
         setLoginData(data);
+        console.log(data.email);
         localStorage.setItem('loginData', JSON.stringify(data));
       };
 
