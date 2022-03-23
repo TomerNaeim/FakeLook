@@ -4,6 +4,7 @@ const cors = require("cors");
 const facebookRouter = require("./route/authFacebook");
 const googleRouter = require("./route/authGoogle");
 const authRouter = require("./route/auth");
+const gogRouter = require("./route/googleLogin")
 const container = require("./configContainer");
 const config = container.resolve("config");
 const PORT = config.get("serverPort.port");
@@ -17,6 +18,7 @@ app.use(
   })
 );
 app.use("/authGoogle", googleRouter);
+app.use("/gogRouter", gogRouter);
 app.use("/auth", authRouter);
 app.use("/authFacebook", facebookRouter);
 
