@@ -4,6 +4,7 @@ import React from "react";
 import Login from "./Views/LoginPage/loginPage";
 import Register from "./Views/Register/Register";
 import MainPage from "./Views/MainPage/MainPage";
+import Post from "./Views/Post/Post";
 
 function App() {
   const [user, setUser] = useState({});
@@ -14,6 +15,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/" element={<MainPage />}></Route>
+        <Route path="/post" element={<Post />}></Route>
       </Routes>
     </BrowserRouter>
   );

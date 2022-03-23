@@ -45,7 +45,8 @@ const LoginPage = (props) => {
             },
             config
           )
-          .then((res) => alert(res.data.message));
+          .then((res) => data == res);
+
         console.log(data);
 
         //navigate("/home");
