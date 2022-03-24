@@ -1,0 +1,27 @@
+.leaflet-container {
+    height: 100vh;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+  }
+  .display-center {
+    justify-content: center;
+    display: flex;
+    padding: 0.5em 0em;
+  }
+  .btn {
+    border-radius: 0.25em;
+    border: 0.2em solid black;
+    cursor: pointer;
+  }
+  .btn-home {
+    background-color: rgb(33, 172, 75);
+  }
+  .btn-random {
+    background-color: rgb(243, 220, 11);
+  }
+  

@@ -1,8 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Map from "./Componnets/map";
 
 import "../MainPage/MainPage.css";
+import SimpleMap from "./Componnets/map";
 
 function MainPage() {
   const [dateFrom, setDateFrom] = useState("");
@@ -44,7 +46,10 @@ function MainPage() {
             />
           </form>
         </div>
-        <div>child2</div>
+        <div>child2
+        <SimpleMap></SimpleMap>
+        </div>
+        
       </div>
     </div>
   );
