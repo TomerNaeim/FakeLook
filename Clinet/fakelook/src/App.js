@@ -5,6 +5,7 @@ import Login from "./Views/LoginPage/loginPage";
 import Register from "./Views/Register/Register";
 import MainPage from "./Views/MainPage/MainPage";
 import Post from "./Views/Post/Post";
+import MakeFriends from "./Views/MakeFriends/MakeFriends";
 
 function App() {
   const [user, setUser] = useState({});
@@ -16,6 +17,7 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/" element={<MainPage />}></Route>
         <Route path="/post" element={<Post />}></Route>
+        <Route path="/MakeFriends" element={<MakeFriends />}></Route>
       </Routes>
     </BrowserRouter>
   );

@@ -46,10 +46,10 @@ function MainPage() {
             />
           </form>
         </div>
-        <div>child2
-        <SimpleMap></SimpleMap>
+        <div>
+          child2
+          <SimpleMap></SimpleMap>
         </div>
-        
       </div>
     </div>
   );
