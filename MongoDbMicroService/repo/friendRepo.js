@@ -14,9 +14,14 @@ module.exports = class FriendRep {
     let friends = await this.allFriends();
     return friends;
   }
+  async AddToListRepo(body) {
+    console.log("inside add");
+    let friends = await this.AddToList(body.id, body.friend);
+    return friends;
+  }
 
   async deleteByIdFriendsRep(body) {
-    let friends = await this.deleteByIdFriends(body.id);
+    let friends = await this.deleteByIdFriends(body.id, body.friend);
     return friends;
   }
 
@@ -62,5 +67,12 @@ module.exports = class FriendRep {
       }
     );
     return friends;
+  }
+  async AddToList(id, friend) {
+    let friends = await Friend.findById({ _id: id });
+    console.log(friends);
+    console.log(id + "__" + friend, +"__" + friends);
+    friends.friendsCollection.push(friend);
+    await friends.save();
   }
 };
