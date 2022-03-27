@@ -5,6 +5,7 @@ const JWT = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const axios = require("axios");
 const { response, default: e } = require("express");
+const { log } = require("console");
 
 router.post(
   "/signup",
@@ -35,11 +36,15 @@ router.post(
   }
 );
 
-async function makeToken (id,name,email){
-  const token = await JWT.sign({name,email }, "nfb32iur32ibfqfvi3vf932bg932g932", {
-       expiresIn: 360000,
-      });
-      return token;
+async function makeToken(id, name, email) {
+  const token = await JWT.sign(
+    { name, email },
+    "nfb32iur32ibfqfvi3vf932bg932g932",
+    {
+      expiresIn: 360000,
+    }
+  );
+  return token;
 }
 
 router.post("/login", async (req, res) => {
@@ -49,14 +54,19 @@ router.post("/login", async (req, res) => {
   const ops = { email: email, password: password };
   let result = await axios.post("http://localhost:5000/user/login", ops);
   console.log(result.data);
-  // let user = users.find((user) => {
-  //   return user.email === email;
-  // });
-  let tokenMaker =await makeToken(result.data.userName,result.data.email);
+  let userId;
+  let tokenMaker = await makeToken(result.data.userName, result.data.email);
   if (result.data.userName != null) {
     console.log(result.data.userName);
-    
-    res.json({ message: "welcom", name:result.data.userName, email:result.data.email, picture:result.data.profileIMG ,tokenMaker:tokenMaker});
+    userId = result.data._id;
+    res.json({
+      message: "welcom",
+      id: result.data._id,
+      name: result.data.userName,
+      email: result.data.email,
+      // picture: result.data.profileIMG,
+      tokenMaker: tokenMaker,
+    });
   } else {
     console.log("llll");
     res.send({ message: "one of the value not match" });
@@ -71,60 +81,56 @@ router.post("/login", async (req, res) => {
       ],
     });
   }
-
+  console.log(userId);
 });
 module.exports = router;
 
+// Check if the password if valid
+//let isMatch = await bcrypt.compare(result.data.password);
+//
+//if (!isMatch) {
+//  return res.status(404).json({
+//    errors: [
+//      {
+//        msg: "Invalid Credentials",
+//      },
+//    ],
+//  });
+//}
 
+// Send JSON WEB TOKEN
+//const token = await JWT.sign({ email }, "nfb32iur32ibfqfvi3vf932bg932g932", {
+//  expiresIn: 360000,
+//});
 
+// res.json({
+//   token,
+// });
 
+// let user = users.find((user) => {
+//   return user.email === email;
+// });
 
-  // Check if the password if valid
-  //let isMatch = await bcrypt.compare(result.data.password);
-  //
-  //if (!isMatch) {
-  //  return res.status(404).json({
-  //    errors: [
-  //      {
-  //        msg: "Invalid Credentials",
-  //      },
-  //    ],
-  //  });
-  //}
+//if (user) {
+//  return res.status(422).json({
+//    errors: [
+//      {
+//        msg: "This user already exists",
+//      },
+//    ],
+//  });
+//}
 
-  // Send JSON WEB TOKEN
-  //const token = await JWT.sign({ email }, "nfb32iur32ibfqfvi3vf932bg932g932", {
-  //  expiresIn: 360000,
-  //});
+// const hashedPassword = await bcrypt.hash(userPassword, 10);
+//
+// users.push({
+//   userPassword: hashedPassword,
+// });
 
-  // res.json({
-  //   token,
-  // });
-
- // let user = users.find((user) => {
-    //   return user.email === email;
-    // });
-
-    //if (user) {
-    //  return res.status(422).json({
-    //    errors: [
-    //      {
-    //        msg: "This user already exists",
-    //      },
-    //    ],
-    //  });
-    //}
-
-    // const hashedPassword = await bcrypt.hash(userPassword, 10);
-    //
-    // users.push({
-    //   userPassword: hashedPassword,
-    // });
-
-    // const token = await JWT.sign("nfb32iur32ibfqfvi3vf932bg932g932", {
-    //   expiresIn: 360000,
-    // });
-    //
-    // res.json({
-    //   token,
-    // });
+// const token = await JWT.sign("nfb32iur32ibfqfvi3vf932bg932g932", {
+//   expiresIn: 360000,
+// });
+//
+// res.json({
+//   token,
+// });

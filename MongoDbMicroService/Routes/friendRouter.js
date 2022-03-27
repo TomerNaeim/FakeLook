@@ -34,4 +34,11 @@ router.put("/update", async (req, res) => {
   res.send(result);
 });
 
+router.post("/addToList", async (req, res) => {
+  console.log("router list");
+  let result = await FriendRepository.AddToListRepo(req.body);
+  console.log(result);
+  res.send(result);
+});
+
 module.exports = router;
