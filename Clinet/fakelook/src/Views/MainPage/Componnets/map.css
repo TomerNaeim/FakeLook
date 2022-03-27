@@ -24,4 +24,13 @@
   .btn-random {
     background-color: rgb(243, 220, 11);
   }
-  
+  .myPlace{
+      background-color:grey;
+      font-size:50;
+      color: black;
+
+  }
+  .myPlaceWrapper{
+      height: 80px;
+      width: 60px;
+  }

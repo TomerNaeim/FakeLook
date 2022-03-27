@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
 
+const Post = ({ comp }) => <div>new postion</div>;
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 const AnyReactComponentMyPlace = ({ text }) => <div>{text} </div>;
 const YOUR_API_KEY = "AIzaSyDdqZA58veRQXLyB-DH1d5LN-iyKft5c9k";

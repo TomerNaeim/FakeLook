@@ -15,10 +15,10 @@ const PostsScheme = new Scheme({
         type : mongoose.Schema.Types.ObjectID,
         ref : 'User'
     },
-    uploadedLocation :{
+    uploadedLocation :[{
         type: Number,
-        required: [true, 'location numbers  is required']
-    },
+        required: [true, 'location numbers  is required']}
+    ],
     
     dateUploaded:{
         type: Date,
