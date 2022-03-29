@@ -22,7 +22,7 @@ router.post("/getUserByEmail", async (req, res) => {
 });
 router.get("/getAll", async (req, res) => {
   let result = await userRepository.getallUserRep(req.body);
-  console.log(result);
+  // console.log(result);
   res.send(result);
 });
 
