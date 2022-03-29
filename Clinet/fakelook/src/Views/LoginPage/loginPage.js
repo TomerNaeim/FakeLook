@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/loginServ";
 import GoogleLoginComp from "./Componnets/googleLogin";
-import FacebookLogin from "./Componnets/facebookLogin"
+import FacebookLogin from "./Componnets/facebookLogin";
 
 const LoginPage = (props) => {
   const [email, setEmail] = useState("");
@@ -49,9 +49,9 @@ const LoginPage = (props) => {
           )
           .then((res) => {
             alert(res.data.tokenMaker);
-             localStorage.setItem('loginData', JSON.stringify(res.data))
-            });
-         
+            localStorage.setItem("loginData", JSON.stringify(res.data));
+          });
+
         console.log(data);
 
         navigate("/home");
@@ -60,17 +60,13 @@ const LoginPage = (props) => {
 
     console.log(email, password);
   };
-  useEffect(() =>{
-    console.log(localStorage.getItem('loginData'));
-    if(localStorage.getItem('loginData'))
-    {
+  useEffect(() => {
+    console.log(localStorage.getItem("loginData"));
+    if (localStorage.getItem("loginData")) {
       //redirect to main menu with storage item
-       console.log('have token');
-      
+      console.log("have token");
     }
-   
   }, []);
-
   return (
     <div>
       <h1> Log In</h1>
@@ -88,10 +84,9 @@ const LoginPage = (props) => {
         </label>
         <div>
           <button type="submit">Submit</button>
-        {/* <a href="http://localhost:5001/authGoogle/auth/google">{googleLogo}</a> */}
+          {/* <a href="http://localhost:5001/authGoogle/auth/google">{googleLogo}</a> */}
           <GoogleLoginComp></GoogleLoginComp>
           <FacebookLogin></FacebookLogin>
-        
         </div>
       </form>
     </div>
