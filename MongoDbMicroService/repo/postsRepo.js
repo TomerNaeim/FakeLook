@@ -118,36 +118,6 @@ module.exports = class PostsRepo {
     } catch (error) {
       return error;
     }
-<<<<<<< HEAD
-
-    async getPostByID(id) {
-        
-        let post = await Posts.findById(id);
-        return post;
-      }
-    
-    async addPost(tags,userUploaded,
-        uploadedLocation, dateUploaded,userRefrenses, 
-        picture,picturepostLikes,postComments
-       
-        ) {
-           
-            let post = new Posts({
-                tags : tags,
-                userUploaded : userUploaded,
-                uploadedLocation : uploadedLocation,
-                dateUploaded : dateUploaded,
-                userRefrenses : userRefrenses ,
-                picture : picture,
-                postLikes : picturepostLikes,
-                postComments : postComments
-
-
-               
-            });
-            await post.save();
-            return post;
-=======
   }
   async addCommentPost(postId, commentId) {
     try {
@@ -167,7 +137,6 @@ module.exports = class PostsRepo {
           picture: post.picture,
           postLikes: post.postLikes,
           postComments: newCommentArray,
->>>>>>> cff723b9dd2a9df1817d51f4cd7ed1eb3646c792
         }
       );
       return `made update on postId : ${postId}`;
