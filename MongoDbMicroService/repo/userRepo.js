@@ -33,6 +33,10 @@ module.exports = class UserRep {
     let result = await this.login(body.email, body.password);
     return result;
   }
+  async getUserWithEmailRepo(body) {
+    let result = await this.getUserWithEmail(body.email);
+    return result;
+  }
 
   // Inside Functions
 
@@ -46,6 +50,12 @@ module.exports = class UserRep {
         console.log("password no valid");
       }
     }
+  }
+  async getUserWithEmail(email){
+    console.log("inside");
+    let res =  await User.findOne({ emailAdress: email })
+    console.log(res);
+    return res;
   }
 
   async allUser() {

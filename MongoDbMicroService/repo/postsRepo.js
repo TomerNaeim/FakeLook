@@ -64,6 +64,7 @@ module.exports = class PostsRepo {
     }
 
     async getPostByID(id) {
+        
         let post = await Posts.findById(id);
         return post;
       }

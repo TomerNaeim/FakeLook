@@ -16,6 +16,10 @@ router.post("/getUserById", async (req, res) => {
   let result = await userRepository.getUserByIdRep(req.body);
   res.send(result);
 });
+router.post("/getUserByEmail", async (req, res) => {
+  let result = await userRepository.getUserWithEmailRepo(req.body);
+  res.send(result);
+});
 router.get("/getAll", async (req, res) => {
   let result = await userRepository.getallUserRep(req.body);
   console.log(result);

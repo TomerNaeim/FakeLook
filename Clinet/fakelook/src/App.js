@@ -6,6 +6,7 @@ import Register from "./Views/Register/Register";
 import MainPage from "./Views/MainPage/mainPage";
 import Post from "./Views/Post/Post";
 import MakeFriends from "./Views/MakeFriends/MakeFriends";
+import PostCompEditView from "./Views/MainPage/Componnets/PostListComponnets/postComp";
 
 function App() {
   const [user, setUser] = useState({});
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<MainPage />}></Route>
         <Route path="/post" element={<Post />}></Route>
         <Route path="/MakeFriends" element={<MakeFriends />}></Route>
+        <Route path="/PostCompEditView" element={<PostCompEditView></PostCompEditView> }></Route>
       </Routes>
     </BrowserRouter>
   );

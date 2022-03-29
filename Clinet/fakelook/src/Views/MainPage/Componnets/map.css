@@ -34,3 +34,8 @@
       height: 80px;
       width: 60px;
   }
+  .img{
+    position:relative;
+    width: 40px;
+    height: 40px;
+  }

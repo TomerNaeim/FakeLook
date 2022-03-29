@@ -41,6 +41,8 @@ module.exports = class PostComments {
       userId: userId,
     });
     await postComment.save();
+   let commentRes= await PostComment.findOne({userId:userId,comment:comment})
+   console.log(commentRes);
     return postComment;
   }
 
