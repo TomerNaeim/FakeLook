@@ -2,20 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/registerServ";
 const Register = () => {
-  //  const initialState = {
-  //    name: "",
-  //    email: "",
-  //    password: "",
-  //  };
-  //  const [user, setUser] = useState(initialState);
-  //
-  //  const handlechange = (e) => {
-  //    const { name, value } = e.target;
-  //    setUser({
-  //      ...user,
-  //      [name]: value,
-  //    });
-  //  };
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -61,10 +47,8 @@ const Register = () => {
         config
       );
 
-      //  navigate("/home");
       console.log("here from register");
     }
-    // console.log(email, password);
   };
   return (
     <div>
