@@ -5,6 +5,7 @@ import { Link, withRouter } from 'react-router-dom';
 import './map.css'
 import importPostsServices from './Services/importPostsService';
 import ListOfPosts from './PostListComponnets/listOfPosts';
+import getNameForUserService from './Services/getNameForUserService';
 
 
 //import PostComp from './PostListComponnets/postComp';
@@ -68,14 +69,16 @@ const SimpleMap=()=> {
 
       const makeMarkers = ()=>{
        return arrPosts.slice(2).map((marker, i) =>{
-          console.log(marker);
+
+        if(marker.uploadedLocation[0] != null)  
+        {console.log(marker.uploadedLocation);
          return <PostComp
          key={i}
          lat={marker.uploadedLocation[0]}
          lng={marker.uploadedLocation[1]}
          props = {marker}
          
-         />
+         />}
         }
         )
       }
@@ -91,19 +94,7 @@ const SimpleMap=()=> {
           defaultZoom={startZoom}
         >
           
-          {/* {arrPosts.slice(2).map((marker, i) =>{
-              return(<PostComp
-                  key={i}
-                  lat={marker.uploadedLocation[0]}
-                  lng={marker.uploadedLocation[1]}
-                  img_src={marker.picture}
-                  // onChildClick={this.markerClicked.bind(this, marker)}
-                />
-
-              )
-            })}      */}
-         
-           {/* <ListOfPosts  list = {arrPosts}></ListOfPosts> */}
+          
            {makeMarkers()}
             <AnyReactComponentMyPlace
             lat={myLocation.lat}
@@ -128,27 +119,30 @@ const SimpleMap=()=> {
     const [postComments,setPostComments] = useState(props.postComments);
     const [lng,setLng] = useState(props.uploadedLocation[1]);
     const [lat,setLat] = useState(props.uploadedLocation[0]);
+    const [userPostModel,setUserPostModel] = useState({})
     const navigate = useNavigate();
     const markerClicked=()=>{
       
       navigate('/PostCompEditView',{state:{model:postModel}});
     }
    
-   const makeSomething=()=>{
-      console.log(userPicture);
-    }
+   
+    useEffect(async ()=>{
+      let data = await getNameForUserService(userUploaded)
+      setUserPostModel(data);
+    },[])
   
   
   return(
 
     <div>
-          {makeSomething()}
+          
     <div>
-      {userUploaded} 
+      {userPostModel.userName} <label>likes: {postModel.postLikes}</label>
       
     </div>
     <img className='img' src={userPicture} alt="image" />
-     <button onClick={markerClicked}></button>
+     <button onClick={markerClicked}>enter post</button>
    
     </div>
   )}

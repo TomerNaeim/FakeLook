@@ -1,11 +1,15 @@
 import GoogleLogin from "react-google-login";
 import { useState } from "react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
+
 const GOOGLE_CLIENT_ID =
   "378037402068-hnpf4gt6obl7o2nvdqf3fmfoc55u34qv.apps.googleusercontent.com";
 const GOOGLE_CLIENT_SECRET = "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";
 
 const GoogleLoginComp = (props) => {
+  const navigate = useNavigate();
   const [loginData, setLoginData] = useState(
     localStorage.getItem("loginData")
       ? JSON.parse(localStorage.getItem("loginData"))
@@ -35,6 +39,7 @@ const GoogleLoginComp = (props) => {
     setLoginData(data);
     console.log(data.email);
     localStorage.setItem("loginData", JSON.stringify(data));
+    navigate('/')
   };
 
   const handleLogout = () => {

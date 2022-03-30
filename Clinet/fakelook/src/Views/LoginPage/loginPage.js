@@ -65,6 +65,7 @@ const LoginPage = (props) => {
     if (localStorage.getItem("loginData")) {
       //redirect to main menu with storage item
       console.log("have token");
+      navigate("/");
     }
   }, []);
   return (
