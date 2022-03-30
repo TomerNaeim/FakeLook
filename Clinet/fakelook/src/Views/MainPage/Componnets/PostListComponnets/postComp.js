@@ -42,23 +42,6 @@ const PostCompEditView = ({props})=>{
       }
       return arr;
 
-      // const resultArray = await  Promise.all(postComments.map(async (i) => {
-      //  let com= getCommentModelService(i);
-      //  console.log(com);
-      // }));
-      // console.log(resultArray);
-
-    //  const promis =  postComments.map(async (p)=>{
-    //    console.log('inside');
-    //    let com = await getCommentModelService(p);
-    //    console.log(com);
-    //    arr.push(com);
-    //   // return com;
-    //    return <div>{com.comment}</div>
-    //  })
-     
-    //  return Promise.all(promis) 
-
     }
      else{
        console.log("no Comments Were Found");
@@ -70,15 +53,9 @@ const PostCompEditView = ({props})=>{
      let res = await loadComments();
      console.log(res);
      setLoadedComments(res);
-    //  return res.map((c)=>{
-    //    console.log(c.props.children);
-    //   return <div>{c.props.children}</div>
-    //  })
-     
+    
    }
-  //  const inputMessege = (e)=>{
-  //   setCommentInput(e.target.value)
-  //  }
+  
    const addComment= async ()=>{
      console.log(myUserModel._id,);
      let res = await addCommentPostIdService(commentInput,myUserModel._id,postModel._id);
@@ -116,6 +93,7 @@ const PostCompEditView = ({props})=>{
             <div >
                 <div>Post by :{userModel.userName}</div>
                 <img src={userPicture} alt="image"/>
+                <div>posted on : {dateUploaded} HashTags : {tags.map((t)=><label>{t}</label>)}</div>
                 <div>likes : {postLikes} <button onClick={giveLike}>like</button></div>
                 <div>Comments</div>
                 <div className="commentTable">

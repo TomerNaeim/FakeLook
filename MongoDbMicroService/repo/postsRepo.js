@@ -77,7 +77,7 @@ module.exports = class PostsRepo {
     tags,
     userUploaded,
     uploadedLocation,
-    //dateUploaded,
+    dateUploaded,
     userRefrenses,
     picture,
     picturepostLikes,

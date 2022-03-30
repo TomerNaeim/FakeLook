@@ -13,12 +13,24 @@ function MainPage() {
   const [imageTags, SetImageTags] = useState("");
   const [taggetUsers, SetTaggetUsers] = useState("");
 
+
+  const logOut = ()=>{
+    
+    if(localStorage.getItem("loginData"))
+    {
+      console.log("inside");
+      localStorage.clear();
+      navigate("/login");
+    }
+  }
+
   const navigate = useNavigate();
   const postPage = async () => {
     navigate("/post");
   };
   return (
     <div className="body">
+      <div>LogOut Here....  <button onClick={logOut}></button></div>
       <div className="container">
         <div className="child1">
           child1
