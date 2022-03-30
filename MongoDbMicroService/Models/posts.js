@@ -31,7 +31,7 @@ const PostsScheme = new Scheme({
   ],
   picture: {
     type: String,
-    //  required: [true, "picture is requierd"],
+    required: [true, "picture is requierd"],
   },
   postLikes: {
     type: Number,
