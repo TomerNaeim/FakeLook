@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import postApi from "../services/postServ";
 import userApi from "../services/userServ";
 import Select from "react-select";
-import MultiSelect from "react-multiple-select-dropdown-lite";
 import { format } from "date-fns";
 
 function Post() {
@@ -48,18 +47,19 @@ function Post() {
     let loginData = localStorage.getItem("loginData");
     let res = JSON.parse(loginData);
     const userUploaded = res.id;
+    let arr = [uploadedLocation.longitude, uploadedLocation.latitude];
     console.log(userUploaded);
     let body = {
-      tags: tags,
-      uploadedLocation: arr,
-      userUploaded: userUploaded,
-      dateUploaded: datetime,
-      picture: picture,
-      userRefrenses: [],
-      postLikes: 0,
-      postComments: [],
+      "tags": tags,
+      "uploadedLocation": arr,
+      "userUploaded": userUploaded,
+      "dateUploaded": datetime,
+      "picture": picture,
+      "userRefrenses": [],
+      "postLikes": 0,
+      "postComments": [],
     };
-    let arr = [uploadedLocation.longitude, uploadedLocation.latitude];
+    
     const { data } = postApi.post("/addPost", body, config);
 
     // addPost();
@@ -97,7 +97,7 @@ function Post() {
           <div key={num}>{num}</div>
         ))}
       </div> */}
-      <div>{uploadedLocation.longitude}</div>
+      <div></div>
     </div>
   );
 }
