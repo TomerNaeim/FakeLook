@@ -15,6 +15,11 @@ module.exports = class UserRep {
     );
     return user;
   }
+  async findUserRepo(body) {
+    console.log(body.name);
+    let result = await this.findUser(body.name);
+    return result;
+  }
   async getUserByIdRep(body) {
     let user = await this.getUserByID(body.id);
     return user;
@@ -39,6 +44,17 @@ module.exports = class UserRep {
   }
 
   // Inside Functions
+  async findUser(name) {
+    console.log("inside");
+    let res = await User.findOne({ userName: name });
+    console.log(res.id);
+    if (res) {
+      console.log(res.id);
+      return res.id;
+    } else {
+      console.log(" not fide");
+    }
+  }
 
   async login(email, password) {
     let res = await User.findOne({ emailAdress: email });
@@ -51,9 +67,9 @@ module.exports = class UserRep {
       }
     }
   }
-  async getUserWithEmail(email){
+  async getUserWithEmail(email) {
     console.log("inside");
-    let res =  await User.findOne({ emailAdress: email })
+    let res = await User.findOne({ emailAdress: email });
     console.log(res);
     return res;
   }

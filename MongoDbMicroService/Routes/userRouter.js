@@ -31,6 +31,11 @@ router.delete("/delete", async (req, res) => {
   console.log(result);
   res.send(result);
 });
+router.post("/findone", async (req, res) => {
+  let result = await userRepository.findUserRepo(req.body);
+  console.log(result);
+  res.send(result);
+});
 
 router.post("/login", async (req, res) => {
   let result = await userRepository.loginRepo(req.body);

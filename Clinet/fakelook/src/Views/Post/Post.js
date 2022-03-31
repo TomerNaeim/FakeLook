@@ -11,6 +11,7 @@ function Post() {
   //const [postLikes, setPostLikes] = useState(0);
   const [flag, setFlag] = useState(false);
   const [list, setList] = useState([]);
+  const [userRefrenses, setUserRefrenses] = useState([]);
   useEffect(async () => {
     const response = await userApi.get("/getAll");
     setList(response.data);
@@ -27,7 +28,6 @@ function Post() {
         latitude: latitude,
         longitude: longitude,
       });
-      // console.log(data.coords);
       setFlag(true);
     });
   };
@@ -40,29 +40,35 @@ function Post() {
         "Content-type": "application/json",
       },
     };
+    console.log(userRefrenses);
 
     console.log(uploadedLocation);
-    //setUploadedLocation(cords);
-    //console.log(uploadedLocation);
     let loginData = localStorage.getItem("loginData");
     let res = JSON.parse(loginData);
     const userUploaded = res.id;
-    let arr = [uploadedLocation.longitude, uploadedLocation.latitude];
-    console.log(userUploaded);
-    let body = {
-      "tags": tags,
-      "uploadedLocation": arr,
-      "userUploaded": userUploaded,
-      "dateUploaded": datetime,
-      "picture": picture,
-      "userRefrenses": [],
-      "postLikes": 0,
-      "postComments": [],
+    let tempa = {
+      name: userRefrenses,
     };
-    
-    const { data } = postApi.post("/addPost", body, config);
+    let user = await userApi.post("/findone", tempa, config);
+    console.log(user.data);
+    let userRefrense = user.data;
+    console.log(userRefrense);
 
-    // addPost();
+    let arr = [uploadedLocation.longitude, uploadedLocation.latitude];
+    let body = {
+      tags: tags,
+      uploadedLocation: arr,
+      userUploaded: userUploaded,
+      dateUploaded: datetime,
+      picture: picture,
+      userRefrenses: userRefrense,
+      postLikes: 0,
+      postComments: [],
+    };
+    console.log(userRefrenses);
+
+    const { data } = postApi.post("/addPost", body, config);
+    console.log("finish");
   };
 
   return (
@@ -81,22 +87,15 @@ function Post() {
           onChange={(e) => setPicture(e.target.value)}
         />
 
-        <select>
-          {list.map((person) => (
-            <option>{person.userName}</option>
-          ))}
-        </select>
+        <input
+          type="text"
+          name="UserRefrenses"
+          onChange={(e) => setUserRefrenses(e.target.value)}
+        />
 
-        <label> image</label>
-        <input type="file" />
         <input type="submit" value="add" />
       </form>
-      {/* <div>
-        {flag}:
-        {uploadedLocation.map((num) => (
-          <div key={num}>{num}</div>
-        ))}
-      </div> */}
+
       <div></div>
     </div>
   );

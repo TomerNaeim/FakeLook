@@ -32,7 +32,6 @@ function MakeFriends() {
     });
     console.log(user.data.friendsCollectionFK);
     let body = { id: user.data.friendsCollectionFK, friend: data };
-    console.log(data);
     await friendApi.post("/addToList", body);
   };
 
