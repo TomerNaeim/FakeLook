@@ -49,25 +49,32 @@ function Post() {
       name: userRefrenses,
     };
     let user = await userApi.post("/findone", tempa, config);
-    console.log(user.data);
-    let userRefrense = user.data;
-    console.log(userRefrense);
-
-    let arr = [uploadedLocation.longitude, uploadedLocation.latitude];
-    let body = {
-      tags: tags,
-      uploadedLocation: arr,
-      userUploaded: userUploaded,
-      dateUploaded: datetime,
-      picture: picture,
-      userRefrenses: userRefrense,
-      postLikes: 0,
-      postComments: [],
-    };
-    console.log(userRefrenses);
-
-    const { data } = postApi.post("/addPost", body, config);
-    console.log("finish");
+    if(user=="not found")
+    {
+      console.log("inside");
+    }
+    else{
+      console.log(user.data);
+      let userRefrense = user.data;
+      console.log(userRefrense);
+  
+      let arr = [uploadedLocation.longitude, uploadedLocation.latitude];
+      let body = {
+        tags: tags,
+        uploadedLocation: arr,
+        userUploaded: userUploaded,
+        dateUploaded: datetime,
+        picture: picture,
+        userRefrenses: userRefrense,
+        postLikes: 0,
+        postComments: [],
+      };
+      console.log(userRefrenses);
+  
+      const { data } = postApi.post("/addPost", body, config);
+      console.log("finish");
+    }
+    
   };
 
   return (

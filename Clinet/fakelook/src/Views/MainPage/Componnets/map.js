@@ -24,6 +24,7 @@ const SimpleMap=()=> {
  const [profile,setProfile] = useState({});
  const [arrPosts,setArrPosts] = useState([]);
  const [firstLoad,setFirstLoad] = useState(true);
+ const [searchParameters,setSearchParameters] = useState({});
    
 
   useEffect(async ()=>{
@@ -57,6 +58,10 @@ const SimpleMap=()=> {
          //this.props.postArray.map((e)=>console.log(e));
      }
   }
+
+  const refresh = ()=>{
+
+  }
   const getLocation=()=>{
     navigator.geolocation.getCurrentPosition (
         (data) => {
@@ -68,7 +73,7 @@ const SimpleMap=()=> {
      
 
       const makeMarkers = ()=>{
-       return arrPosts.slice(2).map((marker, i) =>{
+       return arrPosts.slice(0).map((marker, i) =>{
 
         if(marker.uploadedLocation[0] != null)  
         {console.log(marker.uploadedLocation);
@@ -88,6 +93,7 @@ const SimpleMap=()=> {
     return (
       // Important! Always set the container height explicitly
       <div style={{ height: "100vh", width: "100%" }}>
+        {/* <button onClick={refresh()}>Apply Search</button> */}
         <GoogleMapReact
           bootstrapURLKeys={{ key: YOUR_API_KEY}}
           defaultCenter={center}

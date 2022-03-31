@@ -23,6 +23,34 @@ function MainPage() {
       navigate("/login");
     }
   }
+  const onSearch = ()=>{
+    let info = localStorage.getItem("searchData")
+    
+    if(info)
+    {
+      console.log(info);
+      let temp = {
+        dateFrom:dateFrom,
+        dateTo:dateTo,
+        publisher:publishers,
+        tags : imageTags,
+        userTags:taggetUsers
+      }
+      localStorage.setItem("searchData",JSON.stringify(temp));
+      
+    }
+    else{
+
+      let temp = {
+        dateFrom:dateFrom,
+        dateTo:dateTo,
+        publisher:publishers,
+        tags : imageTags,
+        userTags:taggetUsers
+      }
+      localStorage.setItem("searchData",JSON.stringify(temp));
+    }
+  }
 
   const navigate = useNavigate();
   const postPage = async () => {
@@ -57,6 +85,7 @@ function MainPage() {
               onChange={(e) => SetTaggetUsers(e.target.value)}
             />
           </form>
+          <button onClick={onSearch()}></button>
         </div>
         <div>
           child2

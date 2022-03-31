@@ -6,6 +6,7 @@ module.exports = class UserRep {
   //OutSide Function to export Outside
   async addUserRep(body, newFriendID) {
     // console.log(newFriendID);
+    console.log(body,"in add");
     let user = await this.addUser(
       body.userName,
       body.userPassword,
@@ -18,6 +19,9 @@ module.exports = class UserRep {
   async findUserRepo(body) {
     console.log(body.name);
     let result = await this.findUser(body.name);
+    if (result == "not found") {
+      return "not found"
+    }
     return result;
   }
   async getUserByIdRep(body) {
@@ -51,12 +55,13 @@ module.exports = class UserRep {
   async findUser(name) {
     console.log("inside");
     let res = await User.findOne({ userName: name });
-    console.log(res.id);
+   
     if (res) {
       console.log(res.id);
       return res.id;
     } else {
       console.log(" not fide");
+      return "not found"
     }
   }
 

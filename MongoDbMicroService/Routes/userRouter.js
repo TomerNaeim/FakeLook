@@ -34,14 +34,10 @@ router.delete("/delete", async (req, res) => {
   console.log(result);
   res.send(result);
 });
-router.post("/findone", async (req, res, next) => {
-  try {
-    let result = await userRepository.findUserRepo(req.body);
-    console.log(result);
-    res.send(result);
-  } catch (e) {
-    next(e);
-  }
+router.post("/findone", async (req, res) => {
+  let result = await userRepository.findUserRepo(req.body);
+  if (result == "not found") res.send("not found");
+  res.send(result);
 });
 
 router.post("/login", async (req, res) => {
