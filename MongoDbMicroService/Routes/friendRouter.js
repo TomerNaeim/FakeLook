@@ -42,3 +42,13 @@ router.post("/addToList", async (req, res) => {
 });
 
 module.exports = router;
+
+//mongo
+/*
+  [1, 2, 3, 4, 5, 6, 7]
+*/
+
+/*
+[8, 9, 1, 34, 55]
+8
+*/

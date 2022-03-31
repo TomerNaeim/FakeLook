@@ -8,7 +8,6 @@ function Post() {
   const [picture, setPicture] = useState("");
   const [uploadedLocation, setUploadedLocation] = useState({});
   const [tags, setTags] = useState("");
-  //const [postLikes, setPostLikes] = useState(0);
   const [flag, setFlag] = useState(false);
   const [list, setList] = useState([]);
   const [userRefrenses, setUserRefrenses] = useState([]);

@@ -13,6 +13,9 @@ router.post("/addUser", async (req, res) => {
 });
 
 router.post("/getUserById", async (req, res) => {
+  console.log("====================================");
+  console.log(req.body.id);
+  console.log("====================================");
   let result = await userRepository.getUserByIdRep(req.body);
   res.send(result);
 });
@@ -31,10 +34,14 @@ router.delete("/delete", async (req, res) => {
   console.log(result);
   res.send(result);
 });
-router.post("/findone", async (req, res) => {
-  let result = await userRepository.findUserRepo(req.body);
-  console.log(result);
-  res.send(result);
+router.post("/findone", async (req, res, next) => {
+  try {
+    let result = await userRepository.findUserRepo(req.body);
+    console.log(result);
+    res.send(result);
+  } catch (e) {
+    next(e);
+  }
 });
 
 router.post("/login", async (req, res) => {
@@ -44,3 +51,19 @@ router.post("/login", async (req, res) => {
 });
 
 module.exports = router;
+
+/*
+
+const list = [{ id: 1, name: '1'}, { id: 1, name: '1'}, { id: 1, name: '1'}, { id: 1, name: '1'}]
+list.find()
+
+const map = {
+  '1': { id: 1, name: '1'},
+  '2': { id: 1, name: '1'},
+  '3': { id: 1, name: '1'},
+  '4': { id: 1, name: '1'}
+}
+
+if(map['3'])
+
+*/

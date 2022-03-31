@@ -18,11 +18,25 @@ app.use(
     origin: origin,
   })
 );
+// app.use((req, res, next) => {
+//   console.log("====================================");
+//   console.log("my middlewhere");
+//   console.log("====================================");
+
+//   next("error!!");
+// });
 app.use("/friend", friendRouter);
 app.use("/user", userRouter);
 app.use("/post", postRouter);
 app.use("/groupFriends", groupF);
 app.use("/postComment", postComment);
+
+// app.use((err, req, res, next) => {
+//   res.status.json({
+//     error: true,
+//     message: err,
+//   });
+// });
 
 app.listen(PORT, () => {
   console.log(`server is running on PORT : ${PORT}`);
