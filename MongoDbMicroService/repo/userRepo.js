@@ -25,9 +25,9 @@ module.exports = class UserRep {
     return result;
   }
   async getUserByIdRep(body) {
-    console.log("====================================");
+    
     console.log(body.id);
-    console.log("====================================");
+    
     let user = await this.getUserByID(body.id);
     return user;
   }
@@ -111,7 +111,9 @@ module.exports = class UserRep {
     });
   }
   async getUserByID(id) {
+    console.log(id);
     let result = await User.findById(id);
+    console.log(result);
     return result;
   }
 

@@ -13,9 +13,9 @@ router.post("/addUser", async (req, res) => {
 });
 
 router.post("/getUserById", async (req, res) => {
-  console.log("====================================");
-  console.log(req.body.id);
-  console.log("====================================");
+  
+  console.log(req.body);
+ 
   let result = await userRepository.getUserByIdRep(req.body);
   res.send(result);
 });

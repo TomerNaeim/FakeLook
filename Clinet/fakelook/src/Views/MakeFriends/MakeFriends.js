@@ -12,6 +12,11 @@ function MakeFriends() {
       try {
         console.log(localStorage.getItem("loginData"));
         const response = await userApi.get("/getAll");
+        // console.log(response);
+        // response.data.map(e=>{
+        //   if(arr.includes(e.id))
+        //   console.log("dont arr");
+        // })
         setUserList(response.data);
       } catch (error) {
         if (error.response) {
@@ -33,28 +38,31 @@ function MakeFriends() {
       console.log(user.data.friendsCollectionFK);
       let body = { id: user.data.friendsCollectionFK };
       let friends = await friendApi.post("/getById", body);
+      console.log(friends);
       //console.log(friends.data.friendsCollection[0]);
       let bodytwo = friends.data.friendsCollection;
-      console.log(bodytwo);
+      let arr = [];
       // let newarr = bodytwo.map(async (e) => {
-      //   let users = await axios.post("http://localhost:5000/user/getUserById", {
-      //     e,
-      //   });
+      //   let body = { "id":e}
+      //   let users = await axios.post("http://localhost:5000/user/getUserById",body);
       //   console.log(users);
       // });
       for (let index = 0; index < bodytwo.length; index++) {
         const element = bodytwo[index];
-        let body = { id: ` ${element}` };
+        let body = { "id": element };
         let users = await axios.post(
           "http://localhost:5000/user/getUserById",
-          element
+          body
         );
 
-        console.log(users);
+        if(users !=null)
+        arr.push(users.data);
+        
       }
+      arr.map(e=>console.log(e))
 
       //console.log(users);
-      setFriendList(friends.data.friendsCollection);
+      setFriendList(arr);
     };
     getFriends();
     fetchUser();
@@ -93,7 +101,7 @@ function MakeFriends() {
       <div>
         {userList.map((item, index) => {
           return (
-            <div>
+            <div key={index}>
               <h4>name: {item.userName}</h4>
               <h4>email: {item.emailAdress}</h4>
               <button onClick={() => addFriend(item._id)}></button>
@@ -105,7 +113,7 @@ function MakeFriends() {
       <div>
         {friendList.map((item, index) => {
           return (
-            <div>
+            <div key={index}>
               <h4>name: {item.userName}</h4>
               <h4>email: {item.emailAdress}</h4>
               <button onClick={() => addFriend(item._id)}></button>
