@@ -33,7 +33,8 @@ router.delete("/delete", async (req, res) => {
 });
 router.post("/findone", async (req, res) => {
   let result = await userRepository.findUserRepo(req.body);
-  console.log(result);
+  if(result == "not found")
+  res.send("not found")
   res.send(result);
 });
 

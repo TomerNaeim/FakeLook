@@ -49,7 +49,7 @@ router.post('/api/google-login', async (req, res) => {
   const ops = {
     userName: name,
     emailAdress: email,
-    password : "12345",
+    userPassword : "12345",
     profileIMG: picture,
   };
   let result = await axios.post("http://localhost:5000/user/addUser", ops);
