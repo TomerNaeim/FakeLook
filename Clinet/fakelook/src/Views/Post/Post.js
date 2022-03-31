@@ -58,7 +58,7 @@ function Post() {
       let userRefrense = user.data;
       console.log(userRefrense);
   
-      let arr = [uploadedLocation.longitude, uploadedLocation.latitude];
+      let arr = [uploadedLocation.latitude,uploadedLocation.longitude];
       let body = {
         tags: tags,
         uploadedLocation: arr,
