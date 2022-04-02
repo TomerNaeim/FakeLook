@@ -6,7 +6,7 @@ module.exports = class UserRep {
   //OutSide Function to export Outside
   async addUserRep(body, newFriendID) {
     // console.log(newFriendID);
-    console.log(body,"in add");
+    console.log(body, "in add");
     let user = await this.addUser(
       body.userName,
       body.userPassword,
@@ -20,20 +20,24 @@ module.exports = class UserRep {
     console.log(body.name);
     let result = await this.findUser(body.name);
     if (result == "not found") {
-      return "not found"
+      return "not found";
     }
     return result;
   }
   async getUserByIdRep(body) {
-    
     console.log(body.id);
-    
+
     let user = await this.getUserByID(body.id);
     return user;
   }
 
   async getallUserRep() {
     let users = await this.allUser();
+    return users;
+  }
+
+  async getallUserIdRep() {
+    let users = await this.allUserId();
     return users;
   }
 
@@ -55,13 +59,13 @@ module.exports = class UserRep {
   async findUser(name) {
     console.log("inside");
     let res = await User.findOne({ userName: name });
-   
+
     if (res) {
       console.log(res.id);
       return res.id;
     } else {
       console.log(" not fide");
-      return "not found"
+      return "not found";
     }
   }
 
@@ -88,9 +92,14 @@ module.exports = class UserRep {
     return user;
   }
 
+  async allUserId() {
+    let user = await User.find();
+    return user;
+  }
+
   async deleteUserById(id) {
     let user = await User.findByIdAndDelete(id);
-    return user;
+    return user.id;
   }
 
   async addUser(userName, userPassword, emailAdress, profileIMG, newFriendID) {
