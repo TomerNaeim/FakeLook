@@ -1,5 +1,7 @@
 const Posts = require("../models/posts");
 const container = require("../configContainer");
+const axios = require('axios');
+const Search = require("./Services/SearchClass")
 //const { post } = require('../Routes/userRouter');
 mongoose = container.resolve("mongoose");
 
@@ -18,6 +20,19 @@ module.exports = class PostsRepo {
       body.postComments
     );
     return post;
+  }
+  async filterRepo(body)
+  {
+    console.log(body);
+    let arr = await this.filter(
+      body.dateFrom,
+      body.dateTo,
+      body.tags,
+      body.publisher,
+      body.tagsUsers,
+      body.allPost
+    )
+    return arr;
   }
 
   async getPostByIdRep(body) {
@@ -58,6 +73,15 @@ module.exports = class PostsRepo {
   }
 
   // Inside Functions
+
+  async filter(dateFrom,dateTo,tags,publisher,tagsUsers,allPost)
+  {
+    let PORT2= "http://localhost:5000/user/findone"
+    let body = {"name": publisher}
+    console.log(body);
+         let user = await axios.post(PORT2,body)
+         console.log(user.data);
+  }
   async allPosts() {
     let post = await Posts.find();
     return post;

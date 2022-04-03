@@ -40,5 +40,11 @@ router.post("/addCommentToPost", async (req, res) => {
   console.log(result);
   res.send(result);
 });
+router.post("/filter", async (req, res) => {
+  console.log("inside");
+  let result = await postRepository.filterRepo(req.body);
+  console.log(result);
+  res.send(result);
+});
 
 module.exports = router;
