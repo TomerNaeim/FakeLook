@@ -54,7 +54,7 @@ const LoginPage = (props) => {
 
         console.log(data);
 
-        navigate("/home");
+        navigate("/");
       } catch (error) {}
     }
 

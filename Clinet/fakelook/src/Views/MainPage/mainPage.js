@@ -13,58 +13,56 @@ function MainPage() {
   const [imageTags, SetImageTags] = useState("");
   const [taggetUsers, SetTaggetUsers] = useState("");
 
-
-  const logOut = ()=>{
-    
-    if(localStorage.getItem("loginData"))
-    {
+  const logOut = () => {
+    if (localStorage.getItem("loginData")) {
       console.log("inside");
       localStorage.clear();
       navigate("/login");
     }
-  }
-  const onSearch = ()=>{
-    let info = localStorage.getItem("searchData")
-    
-    if(info)
-    {
+  };
+  const onSearch = () => {
+    let info = localStorage.getItem("searchData");
+
+    if (info) {
       console.log(info);
       let temp = {
-        dateFrom:dateFrom,
-        dateTo:dateTo,
-        publisher:publishers,
-        tags : imageTags,
-        userTags:taggetUsers
-      }
-      localStorage.setItem("searchData",JSON.stringify(temp));
-      
-    }
-    else{
-
+        dateFrom: dateFrom,
+        dateTo: dateTo,
+        publisher: publishers,
+        tags: imageTags,
+        userTags: taggetUsers,
+      };
+      localStorage.setItem("searchData", JSON.stringify(temp));
+    } else {
       let temp = {
-        dateFrom:dateFrom,
-        dateTo:dateTo,
-        publisher:publishers,
-        tags : imageTags,
-        userTags:taggetUsers
-      }
-      localStorage.setItem("searchData",JSON.stringify(temp));
+        dateFrom: dateFrom,
+        dateTo: dateTo,
+        publisher: publishers,
+        tags: imageTags,
+        userTags: taggetUsers,
+      };
+      localStorage.setItem("searchData", JSON.stringify(temp));
     }
-  }
+  };
 
   const navigate = useNavigate();
   const postPage = async () => {
     navigate("/post");
   };
+  const friendsPage = async () => {
+    navigate("/MakeFriends");
+  };
   return (
     <div className="body">
-      <div>LogOut Here....  <button onClick={logOut}></button></div>
+      <div>
+        LogOut Here.... <button onClick={logOut}></button>
+      </div>
       <div className="container">
         <div className="child1">
           child1
           <form>
             <button onClick={postPage}>create new post</button>
-            <button>friends</button>
+            <button onClick={friendsPage}>friends</button>
             <br />
             <label>date from</label>
             <input type="date" onChange={(e) => setDateFrom(e.target.value)} />
