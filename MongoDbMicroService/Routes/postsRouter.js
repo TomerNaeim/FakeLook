@@ -1,13 +1,31 @@
 const express = require("express");
 const router = express.Router();
+
+const { body, validationResult } = require("express-validator");
+
 const container = require("../repContainer");
 const postRepository = container.resolve("PostRep");
 
-router.post("/addPost", async (req, res) => {
-  let result = await postRepository.addPostRep(req.body);
-  console.log(result);
-  res.send(result);
-});
+router.post(
+  "/addPost",
+  body("userUploaded").isLength({ min: 2 }),
+  body("picture").isLength({ min: 2 }),
+  body("dateUploaded").isLength({ min: 2 }),
+  async (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      console.log(errors);
+      return res.status(422).json({
+        errors: errors.array(),
+      });
+    } else {
+      let result = await postRepository.addPostRep(req.body);
+      console.log(result);
+      res.send(result);
+    }
+  }
+);
 router.get("/getAll", async (req, res) => {
   let result = await postRepository.getAllPostRep(req.body);
   console.log(result);

@@ -13,9 +13,8 @@ router.post("/addUser", async (req, res) => {
 });
 
 router.post("/getUserById", async (req, res) => {
-  
   console.log(req.body);
- 
+
   let result = await userRepository.getUserByIdRep(req.body);
   res.send(result);
 });
@@ -25,6 +24,11 @@ router.post("/getUserByEmail", async (req, res) => {
 });
 router.get("/getAll", async (req, res) => {
   let result = await userRepository.getallUserRep(req.body);
+  // console.log(result);
+  res.send(result);
+});
+router.get("/getAllById", async (req, res) => {
+  let result = await userRepository.getallUserIdRep(req.body);
   // console.log(result);
   res.send(result);
 });

@@ -11,6 +11,8 @@ function Post() {
   const [flag, setFlag] = useState(false);
   const [list, setList] = useState([]);
   const [userRefrenses, setUserRefrenses] = useState([]);
+  let loginData = localStorage.getItem("loginData");
+  let res = JSON.parse(loginData);
   useEffect(async () => {
     const response = await userApi.get("/getAll");
     setList(response.data);
@@ -33,48 +35,64 @@ function Post() {
 
   const handleSubnit = async (e) => {
     e.preventDefault();
-    const datetime = format(new Date(), "dd/MM/yyy");
-    const config = {
-      headers: {
-        "Content-type": "application/json",
-      },
-    };
-    console.log(userRefrenses);
-
-    console.log(uploadedLocation);
-    let loginData = localStorage.getItem("loginData");
-    let res = JSON.parse(loginData);
-    const userUploaded = res.id;
-    let tempa = {
-      name: userRefrenses,
-    };
-    let user = await userApi.post("/findone", tempa, config);
-    if(user=="not found")
-    {
-      console.log("inside");
-    }
-    else{
-      console.log(user.data);
-      let userRefrense = user.data;
-      console.log(userRefrense);
-  
-      let arr = [uploadedLocation.latitude,uploadedLocation.longitude];
-      let body = {
-        tags: tags,
-        uploadedLocation: arr,
-        userUploaded: userUploaded,
-        dateUploaded: datetime,
-        picture: picture,
-        userRefrenses: userRefrense,
-        postLikes: 0,
-        postComments: [],
+    const isValid = validate();
+    if (isValid) {
+      const datetime = format(new Date(), "dd/MM/yyy");
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
       };
       console.log(userRefrenses);
-  
-      const { data } = postApi.post("/addPost", body, config);
-      console.log("finish");
+
+      console.log(uploadedLocation);
+      // let loginData = localStorage.getItem("loginData");
+      // let res = JSON.parse(loginData);
+      const userUploaded = res.id;
+      console.log(userUploaded);
+      let tempa = {
+        name: userRefrenses,
+      };
+      let user = await userApi.post("/findone", tempa, config);
+      if (user == "not found") {
+        console.log("inside");
+      } else {
+        console.log(user.data);
+        let userRefrense = user.data;
+        console.log(userRefrense);
+
+        let arr = [uploadedLocation.latitude, uploadedLocation.longitude];
+        let body = {
+          tags: tags,
+          uploadedLocation: arr,
+          userUploaded: userUploaded,
+          dateUploaded: datetime,
+          picture: picture,
+          userRefrenses: userRefrense,
+          postLikes: 0,
+          postComments: [],
+        };
+        console.log(userRefrenses);
+
+        const { data } = postApi.post("/addPost", body, config);
+        console.log("finish");
+      }
+    } else {
+      console.log("ffffffff");
     }
-    
+  };
+
+  const validate = () => {
+    if (picture.length < 2) {
+      alert(" you most pot picture");
+      return false;
+    }
+    if (uploadedLocation.length < 1) {
+      alert(" you most pot picture");
+      return false;
+    }
+
+    return true;
   };
 
   return (
@@ -91,12 +109,15 @@ function Post() {
           type="text"
           name="picture"
           onChange={(e) => setPicture(e.target.value)}
+          placeholder="put some url of picture"
         />
 
+        <label>User Refrenses:</label>
         <input
           type="text"
           name="UserRefrenses"
           onChange={(e) => setUserRefrenses(e.target.value)}
+          placeholder="write some one you wont refrence on your post"
         />
 
         <input type="submit" value="add" />
