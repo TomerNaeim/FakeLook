@@ -67,7 +67,8 @@ const SimpleMap=()=> {
     console.log(arrPosts);
     console.log(search.publisher);
     let res = await makeSearchRequest(search.dateFrom,search.dateTo,search.publisher,search.tags,search.userTags,arrPosts)
-
+    console.log(res);
+    setArrPosts(res)
 
 
   }
@@ -83,6 +84,7 @@ const SimpleMap=()=> {
 
       const makeMarkers = ()=>{
        return arrPosts.slice(0).map((marker, i) =>{
+         if(marker != null){
 
         if(marker.uploadedLocation[0] != null)  
         {console.log(marker.uploadedLocation);
@@ -92,7 +94,7 @@ const SimpleMap=()=> {
          lng={marker.uploadedLocation[1]}
          props = {marker}
          
-         />}
+         />}}
         }
         )
       }
