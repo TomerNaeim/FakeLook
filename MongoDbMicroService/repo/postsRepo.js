@@ -1,5 +1,7 @@
 const Posts = require("../models/posts");
 const container = require("../configContainer");
+const axios = require('axios');
+const Search = require("./Services/SearchClass")
 //const { post } = require('../Routes/userRouter');
 mongoose = container.resolve("mongoose");
 
@@ -18,6 +20,19 @@ module.exports = class PostsRepo {
       body.postComments
     );
     return post;
+  }
+  async filterRepo(body)
+  {
+    console.log("---------",body);
+    let arr = await this.filter(
+      body.dateFrom,
+      body.dateTo,
+      body.tags,
+      body.publisher,
+      body.tagsUsers,
+      body.allPost
+    )
+    return arr;
   }
 
   async getPostByIdRep(body) {
@@ -58,6 +73,37 @@ module.exports = class PostsRepo {
   }
 
   // Inside Functions
+
+  async filter(dateFrom,dateTo,tags,publisher,tagsUsers,allPost)
+  {
+    var d1 = dateFrom.split("/");
+    var d2 = dateTo.split("/");
+    var c = allPost[0].dateUploaded.slice(0,10).split("-");
+    console.log(d2);
+
+    var from = new Date(d1[2], parseInt(d1[1])-1, d1[0]);  // -1 because months are from 0 to 11
+    var to   = new Date(d2[2], parseInt(d2[1])-1, d2[0]);
+    var check = new Date(c[2], parseInt(c[1])-1, c[0]);
+
+  console.log(check > from && check < to)
+
+    let PORT2= "http://localhost:5000/user/findone"
+    let body = {"name": tags}
+    console.log(body);
+    let user = await axios.post(PORT2,body)
+    if(user.data)
+  { 
+    return allPost.map(p=>{
+      console.log("line 85",p);
+      if(p.userUploaded === user.data)
+      
+      return p;
+    })}
+    else{
+      
+    }
+
+  }
   async allPosts() {
     let post = await Posts.find();
     return post;

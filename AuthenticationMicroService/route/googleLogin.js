@@ -53,12 +53,15 @@ router.post('/api/google-login', async (req, res) => {
     profileIMG: picture,
   };
   let result = await axios.post("http://localhost:5000/user/addUser", ops);
-  console.log(result);
+  console.log(result.data);
+  let userInfo = await axios.post("http://localhost:5000/user/getUserByEmail",{"email":email})
+  console.log(userInfo.data);
+  let id = userInfo.data._id;
   upsert(users, { name, email, picture });
  let tokenMaker =await makeToken(name,email);
   console.log(users);
   res.status(201);
-  res.json({ name, email, picture ,tokenMaker});
+  res.json({ id,name, email, picture ,tokenMaker});
 });
 
 module.exports = router;

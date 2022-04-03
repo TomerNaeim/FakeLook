@@ -6,7 +6,7 @@ module.exports = class UserRep {
   //OutSide Function to export Outside
   async addUserRep(body, newFriendID) {
     // console.log(newFriendID);
-    console.log(body, "in add");
+   
     let user = await this.addUser(
       body.userName,
       body.userPassword,
@@ -14,6 +14,7 @@ module.exports = class UserRep {
       body.profileIMG,
       newFriendID
     );
+    console.log("in add",user);
     return user;
   }
   async findUserRepo(body) {
@@ -61,7 +62,7 @@ module.exports = class UserRep {
     let res = await User.findOne({ userName: name });
 
     if (res) {
-      console.log(res.id);
+      console.log(res);
       return res.id;
     } else {
       console.log(" not fide");
@@ -106,7 +107,13 @@ module.exports = class UserRep {
     User.findOne({ emailAdress: emailAdress }, (err, user) => {
       if (user) {
         console.log("this email ulready register");
-      } else {
+      
+        let res = {"id":user._id}
+        console.log(res);
+        return res;
+      } 
+      else {
+        console.log("adding new user");
         let user = new User({
           userName: userName,
           userPassword: userPassword,

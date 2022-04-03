@@ -6,6 +6,7 @@ import './map.css'
 import importPostsServices from './Services/importPostsService';
 import ListOfPosts from './PostListComponnets/listOfPosts';
 import getNameForUserService from './Services/getNameForUserService';
+import makeSearchRequest from './Services/makeSearchRequest';
 
 
 //import PostComp from './PostListComponnets/postComp';
@@ -59,7 +60,16 @@ const SimpleMap=()=> {
      }
   }
 
-  const refresh = ()=>{
+  const refresh = async ()=>{
+    let searchData = localStorage.getItem('searchData');
+    let search =  JSON.parse(searchData);
+    console.log(search);
+    console.log(arrPosts);
+    console.log(search.publisher);
+    let res = await makeSearchRequest(search.dateFrom,search.dateTo,search.publisher,search.tags,search.userTags,arrPosts)
+    console.log(res);
+    setArrPosts(res)
+
 
   }
   const getLocation=()=>{
@@ -74,6 +84,7 @@ const SimpleMap=()=> {
 
       const makeMarkers = ()=>{
        return arrPosts.slice(0).map((marker, i) =>{
+         if(marker != null){
 
         if(marker.uploadedLocation[0] != null)  
         {console.log(marker.uploadedLocation);
@@ -83,7 +94,7 @@ const SimpleMap=()=> {
          lng={marker.uploadedLocation[1]}
          props = {marker}
          
-         />}
+         />}}
         }
         )
       }
@@ -93,7 +104,7 @@ const SimpleMap=()=> {
     return (
       // Important! Always set the container height explicitly
       <div style={{ height: "100vh", width: "100%" }}>
-        {/* <button onClick={refresh()}>Apply Search</button> */}
+        <button onClick={refresh}>Apply Search</button>
         <GoogleMapReact
           bootstrapURLKeys={{ key: YOUR_API_KEY}}
           defaultCenter={center}
