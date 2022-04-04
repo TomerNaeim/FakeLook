@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+ 
 }
 
 body {
@@ -8,10 +9,10 @@ body {
 .container {
   display: grid;
   height: 100vh;
-  grid-template-columns: 200px auto;
+  grid-template-columns: 600px 800px;
 }
 .child1 {
-  width: 800px;
+  width: 600px;
   background: gray;
 }
 input[type="text"],
@@ -28,7 +29,10 @@ label {
   display: inline-block;
 }
 .child2{
-  width: 900px;
+  
+  padding-left:400px;
+  grid-column-start: 1;
+  width: 2000px;
   height: 600px;
 }
 
