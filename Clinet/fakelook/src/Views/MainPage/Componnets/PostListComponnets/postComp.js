@@ -80,7 +80,7 @@ const PostCompEditView = ({props})=>{
         let local =localStorage.getItem("loginData");
         let obj = JSON.parse(local);
         console.log(obj.email);
-        let user2 =  await getUserModelWithEmailService("yhoshoqqqqqqqqqa144@gmail.com");
+        let user2 =  await getUserModelWithEmailService(obj.email);
         setMyUserModel(user2);
 
     },[setPostModel])

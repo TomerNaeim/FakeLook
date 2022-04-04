@@ -21,6 +21,12 @@ module.exports = class PostsRepo {
     );
     return post;
   }
+  async getPostsOnlyFriends(body)
+  {
+    let posts = await this.allPostsOnlyFriends(body.id);
+    console.log("allPosts",posts);
+    return posts;
+  }
   async filterRepo(body)
   {
     console.log("---------",body);
@@ -74,34 +80,78 @@ module.exports = class PostsRepo {
 
   // Inside Functions
 
+
+  async allPostsOnlyFriends(id)
+  {
+    let myUser = await axios.post("http://localhost:5000/user/getUserById",{"id":id})
+    console.log(myUser);
+    let friendList = await axios.post("http://localhost:5000/friend/getById",{"id":myUser.data.friendsCollectionFK})
+    console.log(friendList.data.friendsCollection);
+    let post = await Posts.find();
+   return post.map(p=>{
+      for (let index = 0; index < friendList.data.friendsCollection.length; index++) {
+        console.log("inside",p);
+        let element = friendList.data.friendsCollection[index];
+        console.log(p.userUploaded.toString());
+        if(element===p.userUploaded.toString())
+      {
+        console.log("found");
+        return p;
+      }
+      
+      }
+    })
+  }
+
   async filter(dateFrom,dateTo,tags,publisher,tagsUsers,allPost)
   {
+    if(dateFrom != "")
+    {
+      console.log("Got Dated From");
+      let flagDateFrom = true;
+    }
+    if(dateTo != "")
+    {
+      console.log("Got Dated To");
+      let flagDateTo = true;
+    }
+    
     var d1 = dateFrom.split("/");
     var d2 = dateTo.split("/");
-    var c = allPost[0].dateUploaded.slice(0,10).split("-");
-    console.log(d2);
+    
 
     var from = new Date(d1[2], parseInt(d1[1])-1, d1[0]);  // -1 because months are from 0 to 11
     var to   = new Date(d2[2], parseInt(d2[1])-1, d2[0]);
-    var check = new Date(c[2], parseInt(c[1])-1, c[0]);
+    //var check = new Date(c[2], parseInt(c[1])-1, c[0]);
+    //console.log(from,to,check);
 
-  console.log(check > from && check < to)
+   //console.log(check > from && check < to)
 
     let PORT2= "http://localhost:5000/user/findone"
     let body = {"name": tags}
-    console.log(body);
+   
     let user = await axios.post(PORT2,body)
+    console.log("in serch",user.data);
     if(user.data)
   { 
     return allPost.map(p=>{
       console.log("line 85",p);
-      if(p.userUploaded === user.data)
+      if(p.userUploaded == null)
+      {
+        return null;
+      }
+      for (let index = 0; index < user.data.length; index++) {
+        const element = user.data[index];
+        
+        if(element._id==p.userUploaded)
+      {
+        console.log("found");
+        return p;
+      }
       
-      return p;
+      }
     })}
-    else{
-      
-    }
+    
 
   }
   async allPosts() {
