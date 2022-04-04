@@ -8,8 +8,10 @@ module.exports = class GroupFriends {
     console.log(body);
     let groupFriend = await this.addGroupFriends(
       body.groupName,
-      body.friendsGroup
+      body.friendsGroup,
+      body.friend
     );
+
     return groupFriend;
   }
 
@@ -37,17 +39,24 @@ module.exports = class GroupFriends {
     return groupFriend;
   }
 
+  async addToListRepo(body) {
+    console.log("inside group");
+    let group = await this.addToList(body.id, body.user);
+    return group;
+  }
+
   // Inside Function
 
   async allGroupFriends() {
     let groupFriend = await GroupFriend.find();
     return groupFriend;
   }
-  async addGroupFriends(groupName, friendsGroup) {
+  async addGroupFriends(groupName, friendsGroup, friend) {
     let groupFriend = new GroupFriend({
       groupName: groupName,
       friendsGroup: friendsGroup,
     });
+
     await groupFriend.save();
     return groupFriend;
   }
@@ -62,7 +71,7 @@ module.exports = class GroupFriends {
     return groupFriend;
   }
   async UpdateByIdGroupFriends(id, groupName, friendsGroup) {
-      console.log(id);
+    console.log(id);
     let groupFriend = await GroupFriend.updateOne(
       { _id: id },
       {
@@ -72,5 +81,18 @@ module.exports = class GroupFriends {
     );
 
     return groupFriend;
+  }
+  async addToList(id, user) {
+    console.log("fff");
+    let group = await GroupFriend.findById({ _id: id });
+    console.log(group);
+    let newFriendsGroup = group.friendsGroup;
+    newFriendsGroup.push(`${user}`);
+    await GroupFriend.updateOne({ _id: id }, { friendsGroup: newFriendsGroup });
+    //console.log(group);
+    //console.log(id + "__" + user + "__" + group);
+    //group.friendsGroup.push(user);
+    //console.log(user);
+    //group.save;
   }
 };

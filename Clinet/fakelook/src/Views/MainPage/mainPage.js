@@ -55,7 +55,7 @@ function MainPage() {
   return (
     <div className="body">
       <div>
-        LogOut Here.... <button onClick={logOut}></button>
+        <button onClick={logOut}> LogOut Here.... </button>
       </div>
       <div className="container">
         <div className="child1">

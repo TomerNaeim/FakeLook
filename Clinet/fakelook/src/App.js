@@ -7,7 +7,7 @@ import MainPage from "./Views/MainPage/mainPage";
 import Post from "./Views/Post/Post";
 import MakeFriends from "./Views/MakeFriends/MakeFriends";
 import PostCompEditView from "./Views/MainPage/Componnets/PostListComponnets/postComp";
-
+import PostNewGroup from "./Views/group friends/postNewGroup";
 function App() {
   const [user, setUser] = useState({});
 
@@ -15,6 +15,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/newGroup" element={<PostNewGroup />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/" element={<MainPage />}></Route>
         <Route path="/post" element={<Post />}></Route>

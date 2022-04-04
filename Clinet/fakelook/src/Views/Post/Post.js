@@ -55,7 +55,7 @@ function Post() {
       };
       let user = await userApi.post("/findone", tempa, config);
       if (user == "not found") {
-        console.log("inside");
+        alert("user not foud");
       } else {
         console.log(user.data);
         let userRefrense = user.data;
