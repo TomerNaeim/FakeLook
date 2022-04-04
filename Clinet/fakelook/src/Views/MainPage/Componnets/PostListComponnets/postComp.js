@@ -67,6 +67,7 @@ const PostCompEditView = ({props})=>{
      console.log(postModel._id);
     let result= await giveLikeService(postModel._id);
     console.log(result);
+    makeLogic();
 
    }
 

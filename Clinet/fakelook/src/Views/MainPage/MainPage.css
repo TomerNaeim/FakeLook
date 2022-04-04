@@ -8,9 +8,10 @@ body {
 .container {
   display: grid;
   height: 100vh;
-  grid-template-columns: 400px auto;
+  grid-template-columns: 200px auto;
 }
 .child1 {
+  width: 800px;
   background: gray;
 }
 input[type="text"],
@@ -25,5 +26,14 @@ input[type="text"],
 label {
   padding: 12px 12px 12px 0;
   display: inline-block;
+}
+.child2{
+  width: 900px;
+  height: 600px;
+}
+
+.profilePic{
+  width: 150px;
+  height : 150px;
 }
 

@@ -63,8 +63,8 @@ router.post("/login", async (req, res) => {
       message: "welcom",
       id: result.data._id,
       name: result.data.userName,
-      email: result.data.email,
-      // picture: result.data.profileIMG,
+      email: result.data.emailAdress,
+       picture: "https://thumbs.dreamstime.com/b/man-wearing-anonymous-mask-mask-well-known-symbol-online-hacktivist-paris-france-january-group-49265924.jpg",
       tokenMaker: tokenMaker,
     });
   } else {

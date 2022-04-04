@@ -48,7 +48,7 @@ const LoginPage = (props) => {
             config
           )
           .then((res) => {
-            alert(res.data.tokenMaker);
+            
             localStorage.setItem("loginData", JSON.stringify(res.data));
           });
 
