@@ -40,6 +40,12 @@ router.post("/addToList", async (req, res) => {
   console.log(result);
   res.send(result);
 });
+router.post("/remove", async (req, res) => {
+  console.log("router list");
+  let result = await FriendRepository.removeRepo(req.body);
+  console.log(result);
+  res.send(result);
+});
 
 module.exports = router;
 

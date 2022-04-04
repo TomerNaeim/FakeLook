@@ -1,4 +1,4 @@
-.container {
+.containers {
   display: grid;
   height: 100vh;
   grid-template-columns: auto auto auto;
