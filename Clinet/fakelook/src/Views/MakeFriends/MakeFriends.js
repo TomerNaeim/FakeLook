@@ -116,6 +116,17 @@ function MakeFriends() {
     await friendApi.post("/addToList", body);
   };
 
+  const deleteFriends = async (data) => {
+    let user = await axios.post("http://localhost:5000/user/getUserById", {
+      id: res.id,
+    });
+
+    console.log(user.data.friendsCollectionFK);
+    console.log(data);
+    let body = { id: user.data.friendsCollectionFK, friend: data };
+    await friendApi.post("/remove", body);
+  };
+
   const addGroup = async (data) => {
     let loginData = localStorage.getItem("loginData");
     let res = JSON.parse(loginData);
@@ -130,7 +141,7 @@ function MakeFriends() {
   };
 
   return (
-    <div className="container">
+    <div className="containers">
       <div>
         <label>add new friends</label>
         <input
@@ -186,6 +197,7 @@ function MakeFriends() {
               <div key={index}>
                 <h4>name: {item.userName}</h4>
                 <h4>email: {item.emailAdress}</h4>
+                <button onClick={() => deleteFriends(item._id)}>remove</button>
               </div>
             );
           })}
