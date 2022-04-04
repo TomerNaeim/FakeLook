@@ -3,8 +3,13 @@ const router = express.Router();
 const container = require("../repContainer");
 const groupFriendRepository = container.resolve("GroupFriendRep");
 
-router.post("/addGroupFriennd", async (req, res) => {
+router.post("/addGroupFriend", async (req, res) => {
   let result = await groupFriendRepository.addGroupFriendsRep(req.body);
+  console.log(result);
+  res.send(result);
+});
+router.post("/addToList", async (req, res) => {
+  let result = await groupFriendRepository.addToListRepo(req.body);
   console.log(result);
   res.send(result);
 });
