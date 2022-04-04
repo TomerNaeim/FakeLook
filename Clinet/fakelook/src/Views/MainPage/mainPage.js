@@ -78,11 +78,11 @@ function MainPage() {
             <label>image tags</label>
             <input type="text" onChange={(e) => SetImageTags(e.target.value)} />
             <br />
-            <label>tagget users</label>
+            {/* <label>tagget users</label>
             <input
               type="text"
               onChange={(e) => SetTaggetUsers(e.target.value)}
-            />
+            /> */}
           </form>
           <button onClick={onSearch()}></button>
           <div>

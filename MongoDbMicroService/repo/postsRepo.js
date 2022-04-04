@@ -105,41 +105,77 @@ module.exports = class PostsRepo {
 
   async filter(dateFrom,dateTo,tags,publisher,tagsUsers,allPost)
   {
+    let tagedFlag = false;
+    let flagDateFrom = false;
+    let flagDateTo = false;
+    let publisherFlag = false;
+
+    if(publisher !="")
+    {
+      publisherFlag= true;
+    }
+
+    if(tags !="")
+    {
+       tagedFlag= true;
+    }
     if(dateFrom != "")
     {
       console.log("Got Dated From");
-      let flagDateFrom = true;
+       flagDateFrom = true;
     }
     if(dateTo != "")
     {
       console.log("Got Dated To");
-      let flagDateTo = true;
+       flagDateTo = true;
     }
+    if(flagDateTo &&flagDateFrom)
+    {
+      allPost= this.dateFilter(allPost,dateTo,dateFrom)
+      console.log(allPost);
+    }
+    console.log('before', allPost);
+    if(publisherFlag)
+    {
+      allPost = this.userFilter(allPost,publisher);
+    }
+    if(tagedFlag)
+    {
+      allPost = this.tagsFilter(allPost,tags);
+    }
+    return allPost;
+
+   
+  }
+
+  async userFilter(postList,tags)
+  {
+    return postList.map((p)=>{
+      if(p.tags.length =!0)
+      {
+        
+      }
+    })
+  }
+ async userFilter(postList,publisher)
+  {
     
-    var d1 = dateFrom.split("/");
-    var d2 = dateTo.split("/");
-    
-
-    var from = new Date(d1[2], parseInt(d1[1])-1, d1[0]);  // -1 because months are from 0 to 11
-    var to   = new Date(d2[2], parseInt(d2[1])-1, d2[0]);
-    //var check = new Date(c[2], parseInt(c[1])-1, c[0]);
-    //console.log(from,to,check);
-
-   //console.log(check > from && check < to)
-
     let PORT2= "http://localhost:5000/user/findone"
-    let body = {"name": tags}
+    let body = {"name": publisher}
    
     let user = await axios.post(PORT2,body)
     console.log("in serch",user.data);
-    if(user.data)
-  { 
-    return allPost.map(p=>{
+    if(user.data.length != 0 )
+    { 
+      return postList.map(p=>{
       console.log("line 85",p);
+      if(p != null)
+      {
       if(p.userUploaded == null)
       {
         return null;
       }
+      
       for (let index = 0; index < user.data.length; index++) {
         const element = user.data[index];
         
@@ -149,9 +185,44 @@ module.exports = class PostsRepo {
         return p;
       }
       
-      }
+      }}
     })}
+    else
+    {
+       console.log("no name");
+       return allPost;
+    }
+  }
+  dateFilter(postList,dateTo,dateFrom)
+  {
+     var d1 = dateFrom.split("/");
+    var d2 = dateTo.split("/");
     
+    const date = new Date('2022-09-24');
+
+    const start = dateFrom;
+    const end = dateTo;
+    
+   
+    
+
+    var from = new Date(d1[2], parseInt(d1[1])-1, d1[0]);  // -1 because months are from 0 to 11
+    var to   = new Date(d2[2], parseInt(d2[1])-1, d2[0]);
+    console.log("from" ,dateTo.toString());
+    console.log("to" ,dateFrom.toString());
+    return postList.map((e)=>{
+      if(e.dateUploaded){
+
+       let currentDate = e.dateUploaded.slice(0,10); 
+       if (currentDate > start && currentDate < end) {
+        console.log('✅ date is between the 2 dates');
+        return e;
+      } else {
+        
+        console.log('⛔️ date is not in the range');
+        return null;
+      }}
+    })
 
   }
   async allPosts() {

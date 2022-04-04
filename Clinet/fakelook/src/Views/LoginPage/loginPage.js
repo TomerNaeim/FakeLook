@@ -50,11 +50,12 @@ const LoginPage = (props) => {
           .then((res) => {
             
             localStorage.setItem("loginData", JSON.stringify(res.data));
+            navigate("/");
           });
 
         console.log(data);
 
-        navigate("/");
+        
       } catch (error) {}
     }
 

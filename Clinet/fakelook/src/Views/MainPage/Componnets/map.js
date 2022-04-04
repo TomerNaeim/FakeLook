@@ -69,7 +69,14 @@ const SimpleMap=()=> {
     console.log(search.publisher);
     let res = await makeSearchRequest(search.dateFrom,search.dateTo,search.publisher,search.tags,search.userTags,arrPosts)
     console.log(res);
-    setArrPosts(res)
+    let arr= [];
+    arr = res.map((e)=>{
+      if(e != null)
+      {
+        return e;
+      }
+    })
+    setArrPosts(arr)
 
 
   }

@@ -1,7 +1,7 @@
 const axios = require('axios');
 const PORT = "http://localhost:5000/post/filter"
 
-const makeSearchRequest = async (dateFrom,dateTo,tags,publisher,tagsUsers,allPost)=>{
+const makeSearchRequest = async (dateFrom,dateTo,publisher,tags,tagsUsers,allPost)=>{
     console.log('in service')
     console.log(publisher);
     let body = {
