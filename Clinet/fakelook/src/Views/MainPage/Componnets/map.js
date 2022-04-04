@@ -7,6 +7,7 @@ import importPostsServices from './Services/importPostsService';
 import ListOfPosts from './PostListComponnets/listOfPosts';
 import getNameForUserService from './Services/getNameForUserService';
 import makeSearchRequest from './Services/makeSearchRequest';
+import getFriendPostService from './Services/getFriendPostService';
 
 
 //import PostComp from './PostListComponnets/postComp';
@@ -72,6 +73,20 @@ const SimpleMap=()=> {
 
 
   }
+  const restartPosts = async()=>{
+
+  }
+
+  const getFriendPost = async ()=>{
+    let loginData = localStorage.getItem('loginData');
+    let data =  JSON.parse(loginData);
+    let res = await getFriendPostService(data.id);
+    if(res != "Nothing Found")
+    setArrPosts(res)
+    else{
+      window.alert("no posts by Friend Found")
+    }
+  }
   const getLocation=()=>{
     navigator.geolocation.getCurrentPosition (
         (data) => {
@@ -105,6 +120,8 @@ const SimpleMap=()=> {
       // Important! Always set the container height explicitly
       <div style={{ height: "100vh", width: "100%" }}>
         <button onClick={refresh}>Apply Search</button>
+        <button onClick={getFriendPost}>Show Only Friends</button>
+        <button onClick={getPostAll}>Show All Posts</button>
         <GoogleMapReact
           bootstrapURLKeys={{ key: YOUR_API_KEY}}
           defaultCenter={center}

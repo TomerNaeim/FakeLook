@@ -59,11 +59,11 @@ module.exports = class UserRep {
   // Inside Functions
   async findUser(name) {
     console.log("inside");
-    let res = await User.findOne({ userName: name });
+    let res = await User.find({ userName: name });
 
     if (res) {
       console.log(res);
-      return res.id;
+      return res;
     } else {
       console.log(" not fide");
       return "not found";

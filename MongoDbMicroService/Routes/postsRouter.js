@@ -64,5 +64,11 @@ router.post("/filter", async (req, res) => {
   console.log(result);
   res.send(result);
 });
+router.post("/getFriendPosts", async (req, res) => {
+  console.log("inside");
+  let result = await postRepository.getPostsOnlyFriends(req.body);
+  console.log(result);
+  res.send(result);
+});
 
 module.exports = router;
