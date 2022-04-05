@@ -56,7 +56,7 @@ router.post("/login", async (req, res) => {
   console.log(result.data);
   let userId;
   let tokenMaker = await makeToken(result.data.userName, result.data.email);
-  if (result.data.userName != null) {
+  if (result.data.userName != null || result.data.userName != undefined) {
     console.log(result.data.userName);
     userId = result.data._id;
     res.json({

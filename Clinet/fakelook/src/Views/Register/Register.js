@@ -48,6 +48,7 @@ const Register = () => {
       );
 
       console.log("here from register");
+      navigate("/login");
     }
   };
   return (
