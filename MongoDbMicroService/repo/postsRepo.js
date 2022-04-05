@@ -142,20 +142,49 @@ module.exports = class PostsRepo {
     if(tagedFlag)
     {
       allPost = this.tagsFilter(allPost,tags);
+      console.log('after',allPost);
     }
     return allPost;
 
    
   }
 
-  async userFilter(postList,tags)
+   tagsFilter(postList,tags)
   {
-    return postList.map((p)=>{
-      if(p.tags.length =!0)
-      {
-        
-      }
-    })
+    console.log('inside-------',tags);
+    if (postList.length != 0) {
+      console.log(postList.length);
+      return postList.map((p)=>{
+        console.log(p.tags);
+        if(p.tags.length =!0)
+        {
+          for (let index = 0; index < p.tags.length; index++) {
+            const element = p.tags[index];
+            if(element == tags)
+            {
+              console.log(element);
+              return p;
+            }
+          }
+          return null;
+        }
+        else
+        {
+          if(p.tags == tags)
+          {
+            return p
+          }
+          return null;
+        }
+      })
+     
+    }
+    else
+    {
+      if(p.tags == tags)
+      return p
+      return null;
+    }
   }
  async userFilter(postList,publisher)
   {

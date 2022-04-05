@@ -141,6 +141,7 @@ function MakeFriends() {
   };
 
   return (
+    <div>
     <div className="containers">
       <div>
         <label>add new friends</label>
@@ -216,6 +217,7 @@ function MakeFriends() {
           );
         })}
       </div>
+    </div>
     </div>
   );
 }

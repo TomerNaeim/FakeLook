@@ -56,18 +56,26 @@ const PostCompEditView = ({props})=>{
     
    }
   
-   const addComment= async ()=>{
+   const addComment= async ()=>
+   {
      console.log(myUserModel._id,);
      let res = await addCommentPostIdService(commentInput,myUserModel._id,postModel._id);
 
-    console.log(res);
-    loadComments();
+      console.log(res);
+      //loadComments();
+      let x = loadedComments;
+      x.push(commentInput);
+      setPostComments(x);
+      setLoadedComments(x);
+      
      }
    const giveLike = async()=>{
      console.log(postModel._id);
     let result= await giveLikeService(postModel._id);
     console.log(result);
-    makeLogic();
+    //makeLogic();
+    let x = postLikes+1;
+    setPostLikes(x);
 
    }
 
@@ -84,7 +92,7 @@ const PostCompEditView = ({props})=>{
         let user2 =  await getUserModelWithEmailService(obj.email);
         setMyUserModel(user2);
 
-    },[setPostModel])
+    },[setPostModel,setPostLikes,setPostComments])
 
     const greatPlaceStyle = {
         position: 'absolute',
