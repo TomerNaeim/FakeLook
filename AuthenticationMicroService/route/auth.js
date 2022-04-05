@@ -64,7 +64,8 @@ router.post("/login", async (req, res) => {
       id: result.data._id,
       name: result.data.userName,
       email: result.data.emailAdress,
-       picture: "https://thumbs.dreamstime.com/b/man-wearing-anonymous-mask-mask-well-known-symbol-online-hacktivist-paris-france-january-group-49265924.jpg",
+      picture:
+        "https://thumbs.dreamstime.com/b/man-wearing-anonymous-mask-mask-well-known-symbol-online-hacktivist-paris-france-january-group-49265924.jpg",
       tokenMaker: tokenMaker,
     });
   } else {
@@ -84,53 +85,3 @@ router.post("/login", async (req, res) => {
   console.log(userId);
 });
 module.exports = router;
-
-// Check if the password if valid
-//let isMatch = await bcrypt.compare(result.data.password);
-//
-//if (!isMatch) {
-//  return res.status(404).json({
-//    errors: [
-//      {
-//        msg: "Invalid Credentials",
-//      },
-//    ],
-//  });
-//}
-
-// Send JSON WEB TOKEN
-//const token = await JWT.sign({ email }, "nfb32iur32ibfqfvi3vf932bg932g932", {
-//  expiresIn: 360000,
-//});
-
-// res.json({
-//   token,
-// });
-
-// let user = users.find((user) => {
-//   return user.email === email;
-// });
-
-//if (user) {
-//  return res.status(422).json({
-//    errors: [
-//      {
-//        msg: "This user already exists",
-//      },
-//    ],
-//  });
-//}
-
-// const hashedPassword = await bcrypt.hash(userPassword, 10);
-//
-// users.push({
-//   userPassword: hashedPassword,
-// });
-
-// const token = await JWT.sign("nfb32iur32ibfqfvi3vf932bg932g932", {
-//   expiresIn: 360000,
-// });
-//
-// res.json({
-//   token,
-// });

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import userApi from "../services/userServ";
 import friendApi from "../services/friendServ";
 import groupApi from "../services/friendGoupServ";
@@ -7,6 +8,7 @@ import "../MakeFriends/MakeFriends.css";
 import axios from "axios";
 
 function MakeFriends() {
+  const navigate = useNavigate();
   const [userList, setUserList] = useState([]);
   const [groupList, setGroupList] = useState([]);
   const [friendList, setFriendList] = useState([]);
@@ -114,6 +116,7 @@ function MakeFriends() {
     console.log(user.data.friendsCollectionFK);
     let body = { id: user.data.friendsCollectionFK, friend: data };
     await friendApi.post("/addToList", body);
+    window.location.reload();
   };
 
   const deleteFriends = async (data) => {
@@ -125,6 +128,7 @@ function MakeFriends() {
     console.log(data);
     let body = { id: user.data.friendsCollectionFK, friend: data };
     await friendApi.post("/remove", body);
+    window.location.reload();
   };
 
   const addGroup = async (data) => {
@@ -138,6 +142,7 @@ function MakeFriends() {
     let body = { id: data, user: user.data._id };
     console.log(body);
     await groupApi.post("/addToList", body);
+    window.location.reload();
   };
 
   return (

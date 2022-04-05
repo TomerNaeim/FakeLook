@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
- 
 }
 
 body {
@@ -9,10 +8,9 @@ body {
 .container {
   display: grid;
   height: 100vh;
-  grid-template-columns: 600px 800px;
+  grid-template-columns: 400px auto;
 }
 .child1 {
-  width: 600px;
   background: gray;
 }
 input[type="text"],
@@ -28,16 +26,12 @@ label {
   padding: 12px 12px 12px 0;
   display: inline-block;
 }
-.child2{
-  
-  padding-left:400px;
-  grid-column-start: 1;
-  width: 2000px;
+.child2 {
+  width: 900px;
   height: 600px;
 }
 
-.profilePic{
+.profilePic {
   width: 150px;
-  height : 150px;
+  height: 150px;
 }
-

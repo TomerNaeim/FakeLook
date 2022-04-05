@@ -12,8 +12,8 @@ function MainPage() {
   const [publishers, setPublishers] = useState("");
   const [imageTags, SetImageTags] = useState("");
   const [taggetUsers, SetTaggetUsers] = useState("");
-  const [userInfo,setUserInfo] = useState({
-   profile: JSON.parse(localStorage.getItem("loginData"))
+  const [userInfo, setUserInfo] = useState({
+    profile: JSON.parse(localStorage.getItem("loginData")),
   });
 
   const logOut = () => {
@@ -57,9 +57,7 @@ function MainPage() {
   };
   return (
     <div className="body">
-      <div>
-       
-      </div>
+      <div></div>
       <div className="container">
         <div className="child1">
           child1
@@ -87,31 +85,25 @@ function MainPage() {
             /> */}
           </form>
           <button onClick={onSearch()}></button>
-
           <div>
-            <h4>
-              profile
-            </h4>
+            <h4>profile</h4>
             <div>name : {userInfo.profile.name}</div>
             <div>account Name : {userInfo.profile.email}</div>
-            <h2>
-              profile picture
-           
-            </h2>
-            <img className="profilePic" src={userInfo.profile.picture} alt="image"></img>
+            <h2>profile picture</h2>
+            <img
+              className="profilePic"
+              src={userInfo.profile.picture}
+              alt="image"
+            ></img>
             <div>
-            <button onClick={logOut}> LogOut Here.... </button>
+              <button onClick={logOut}> LogOut Here.... </button>
             </div>
-            
-            
           </div>
         </div>
-        <div className="">
-         
-         <SimpleMap></SimpleMap>
-       </div>
+        <div className="child2">
+          <SimpleMap></SimpleMap>
+        </div>
       </div>
-      
     </div>
   );
 }
