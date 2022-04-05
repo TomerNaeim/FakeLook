@@ -9,12 +9,6 @@ const LoginPage = (props) => {
   const [password, setPassword] = useState("");
   const [googleLogo, setGoogleLogo] = useState();
 
-  // const login = async (data) => {
-  //   await api.post("/login", data).then((response) => {
-  //     console.log(response);
-  //   });
-  // };
-
   const validadte = () => {
     if (!email.includes("@", ".com")) {
       alert("invalid email");
@@ -48,14 +42,18 @@ const LoginPage = (props) => {
             config
           )
           .then((res) => {
-            
-            localStorage.setItem("loginData", JSON.stringify(res.data));
-            navigate("/");
+            console.log(res.data.name);
+            if (res.data.name != undefined) {
+              localStorage.setItem("loginData", JSON.stringify(res.data));
+              navigate("/");
+            } else {
+              alert(
+                "email or password not correct ,please try agein or register "
+              );
+            }
           });
 
         console.log(data);
-
-        
       } catch (error) {}
     }
 
@@ -84,6 +82,10 @@ const LoginPage = (props) => {
             onChange={(e) => setPassword(e.target.value)} //*
           />
         </label>
+        <p>
+          Don't have an account?
+          <a href="http://localhost:3000/register"> Sign Up</a>
+        </p>
         <div>
           <button type="submit">Submit</button>
           {/* <a href="http://localhost:5001/authGoogle/auth/google">{googleLogo}</a> */}
