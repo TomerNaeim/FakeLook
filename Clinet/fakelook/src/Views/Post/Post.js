@@ -3,6 +3,7 @@ import postApi from "../services/postServ";
 import userApi from "../services/userServ";
 import Select from "react-select";
 import { format } from "date-fns";
+import "./post.css";
 
 function Post() {
   const [picture, setPicture] = useState("");
@@ -96,7 +97,8 @@ function Post() {
   };
 
   return (
-    <div>
+   <div className="">
+    <div className="containers">
       <form onSubmit={handleSubnit}>
         <label>tags:</label>
         <input
@@ -125,6 +127,7 @@ function Post() {
 
       <div></div>
     </div>
+    </div> 
   );
 }
 
