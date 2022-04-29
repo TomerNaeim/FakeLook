@@ -1,0 +1,203 @@
+openapi: 3.0.0
+info:
+  title: service
+  description: Calls algorithm for a request
+  version: 1.0
+
+servers:
+  - url: http://localhost:5000
+    description: local server
+
+paths:
+  /user/getAll:
+    get:
+      summary: all users
+      tags:
+        - user
+      responses:
+        200:
+          description: sucsses
+          content:
+            application/json:
+              schema:
+                type: object
+                item:
+                  propertires:
+                    id:
+                      type: string
+                    userName:
+                      type: string
+                    userPassword:
+                      type: string
+                    emailAdress:
+                      type: string
+                    profileIMG:
+                      type: string
+
+  /user/getUserById:
+    post:
+      summary: find  user
+      tags:
+        - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              propertires:
+                id:
+                  type: string
+              #   userName:
+              #     type: string
+              #   userPassword:
+              #     type: string
+              #   emailAdress:
+              #     type: string
+              #   profileIMG:
+              #     type: string
+
+      responses:
+        200:
+          description: sucsses
+
+  /user/delete:
+    delete:
+      summary: user
+      tags:
+        - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              propertires:
+                id:
+                  type: string
+              #   userName:
+              #     type: string
+              #   userPassword:
+              #     type: string
+              #   emailAdress:
+              #     type: string
+              #   profileIMG:
+              #     type: string
+
+      responses:
+        200:
+          description: sucsses
+
+  /user/addUser:
+    post:
+      summary: create user
+      tags:
+        - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/user"
+              # type: object
+              # propertires:
+              #   id:
+              #     type: string
+              #   userName:
+              #     type: string
+              #   userPassword:
+              #     type: string
+              #   emailAdress:
+              #     type: string
+              #   profileIMG:
+              #     type: string
+
+      responses:
+        200:
+          description: sucsses
+
+  /post/getAll:
+    get:
+      summary: all posts
+      tags:
+        - post
+      responses:
+        200:
+          description: sucsses
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/post"
+                # type: object
+                # item:
+                #   propertires:
+                #     id:
+                #       type: string
+                #     tags:
+                #       type: string
+                #     uploadedLocation:
+                #       type: integer
+                #     dateUploaded:
+                #       type: date
+                #     picture:
+                #       type: string
+                #     postLikes:
+                #       type: integer
+
+  /post/addPost:
+    post:
+      summary: create post
+      tags:
+        - post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/post"
+      responses:
+        200:
+          description: sucsses
+
+  /post/getById:
+    post:
+      summary: find  post
+      tags:
+        - post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              propertires:
+                id:
+                  type: string
+
+      responses:
+        200:
+          description: sucsses
+
+components:
+  schemas:
+    user:
+      type: object
+      properties:
+        userName:
+          type: string
+        userPassword:
+          type: string
+        emailAdress:
+          type: string
+        profileIMG:
+          type: string
+    post:
+      type: object
+      propertires:
+        tags:
+          type: string
+        userUploaded:
+          type: string
+        uploadedLocation:
+          type: number
+        dateUploaded:
+          type: date
+        picture:
+          type: string
+        postLikes:
+          type: number

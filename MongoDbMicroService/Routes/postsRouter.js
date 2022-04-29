@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const { body, validationResult } = require("express-validator");
-
 const container = require("../repContainer");
+const logger = require("../logger");
 const postRepository = container.resolve("PostRep");
 
 router.post(
@@ -15,10 +15,10 @@ router.post(
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      console.log(errors);
-      return res.status(422).json({
+      res.status(422).json({
         errors: errors.array(),
       });
+      logger.error(errors);
     } else {
       let result = await postRepository.addPostRep(req.body);
       console.log(result);

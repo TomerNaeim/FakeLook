@@ -4,8 +4,8 @@ const { body, validationResult } = require("express-validator");
 const JWT = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const axios = require("axios");
-const { response, default: e } = require("express");
-const { log } = require("console");
+
+const logger = require("../logger");
 
 router.post(
   "/signup",
@@ -20,9 +20,10 @@ router.post(
 
     if (!errors.isEmpty()) {
       console.log(errors);
-      return res.status(422).json({
+      res.status(422).json({
         errors: errors.array(),
       });
+      logger.error(errors);
     } else {
       const ops = {
         userName: name,
@@ -54,6 +55,7 @@ router.post("/login", async (req, res) => {
   const ops = { email: email, password: password };
   let result = await axios.post("http://localhost:5000/user/login", ops);
   console.log(result.data);
+  logger.info(result.data);
   let userId;
   let tokenMaker = await makeToken(result.data.userName, result.data.email);
   if (result.data.userName != null || result.data.userName != undefined) {
@@ -64,7 +66,7 @@ router.post("/login", async (req, res) => {
       id: result.data._id,
       name: result.data.userName,
       email: result.data.emailAdress,
-      picture:result.data.profileIMG,
+      picture: result.data.profileIMG,
       tokenMaker: tokenMaker,
     });
   } else {
@@ -73,13 +75,14 @@ router.post("/login", async (req, res) => {
   }
 
   if (!result) {
-    return res.status(422).json({
+    res.status(422).json({
       errors: [
         {
           msg: "Invalid Credentials",
         },
       ],
     });
+    logger.error(errors);
   }
   console.log(userId);
 });

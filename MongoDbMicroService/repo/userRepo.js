@@ -5,8 +5,6 @@ mongoose = container.resolve("mongoose");
 module.exports = class UserRep {
   //OutSide Function to export Outside
   async addUserRep(body, newFriendID) {
-    // console.log(newFriendID);
-
     let user = await this.addUser(
       body.userName,
       body.userPassword,
@@ -14,11 +12,9 @@ module.exports = class UserRep {
       body.profileIMG,
       newFriendID
     );
-    console.log("in add", user);
     return user;
   }
   async findUserRepo(body) {
-    console.log(body.name);
     let result = await this.findUser(body.name);
     if (result == "not found") {
       return "not found";
@@ -26,8 +22,6 @@ module.exports = class UserRep {
     return result;
   }
   async getUserByIdRep(body) {
-    console.log(body.id);
-
     let user = await this.getUserByID(body.id);
     return user;
   }
@@ -58,14 +52,11 @@ module.exports = class UserRep {
 
   // Inside Functions
   async findUser(name) {
-    console.log("inside");
     let res = await User.find({ userName: name });
 
     if (res) {
-      console.log(res);
       return res;
     } else {
-      console.log(" not fide");
       return "not found";
     }
   }
@@ -74,7 +65,6 @@ module.exports = class UserRep {
     let res = await User.findOne({ emailAdress: email });
     if (res) {
       if (password === res.userPassword) {
-        console.log(res.userPassword);
         return res;
       } else {
         return "password no valid";
@@ -84,9 +74,7 @@ module.exports = class UserRep {
     }
   }
   async getUserWithEmail(email) {
-    console.log("inside");
     let res = await User.findOne({ emailAdress: email });
-    console.log(res);
     return res;
   }
 
@@ -108,13 +96,9 @@ module.exports = class UserRep {
   async addUser(userName, userPassword, emailAdress, profileIMG, newFriendID) {
     User.findOne({ emailAdress: emailAdress }, (err, user) => {
       if (user) {
-        console.log("this email ulready register");
-
         let res = { id: user._id };
-        console.log(res);
         return res;
       } else {
-        console.log("adding new user");
         let user = new User({
           userName: userName,
           userPassword: userPassword,
@@ -128,14 +112,7 @@ module.exports = class UserRep {
     });
   }
   async getUserByID(id) {
-    console.log(id);
     let result = await User.findById(id);
-    console.log(result);
     return result;
   }
-
-  // async getUser(id) {
-  //   let result = await User.findById(id);
-  //   return result.friendsCollectionFK;
-  // }
 };

@@ -89,10 +89,5 @@ module.exports = class GroupFriends {
     let newFriendsGroup = group.friendsGroup;
     newFriendsGroup.push(`${user}`);
     await GroupFriend.updateOne({ _id: id }, { friendsGroup: newFriendsGroup });
-    //console.log(group);
-    //console.log(id + "__" + user + "__" + group);
-    //group.friendsGroup.push(user);
-    //console.log(user);
-    //group.save;
   }
 };

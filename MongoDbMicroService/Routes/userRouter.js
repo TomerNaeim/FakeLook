@@ -51,19 +51,3 @@ router.post("/login", async (req, res) => {
 });
 
 module.exports = router;
-
-/*
-
-const list = [{ id: 1, name: '1'}, { id: 1, name: '1'}, { id: 1, name: '1'}, { id: 1, name: '1'}]
-list.find()
-
-const map = {
-  '1': { id: 1, name: '1'},
-  '2': { id: 1, name: '1'},
-  '3': { id: 1, name: '1'},
-  '4': { id: 1, name: '1'}
-}
-
-if(map['3'])
-
-*/

@@ -12,7 +12,6 @@ function MakeFriends() {
   const [userList, setUserList] = useState([]);
   const [groupList, setGroupList] = useState([]);
   const [friendList, setFriendList] = useState([]);
-  const [disable, setDisable] = useState(false);
   const [search, setSearch] = useState([]);
   const [friendssearch, setFriendssearch] = useState([]);
   let arr = [];
@@ -22,20 +21,12 @@ function MakeFriends() {
   let res = JSON.parse(loginData);
   useEffect(() => {
     const getFriends = async (data) => {
-      // let loginData = localStorage.getItem("loginData");
-      //let res = JSON.parse(loginData);
-      console.log(res);
       let user = await axios.post("http://localhost:5000/user/getUserById", {
         id: res.id,
       });
-      console.log(user.data.friendsCollectionFK);
       let body = { id: user.data.friendsCollectionFK };
       let friends = await friendApi.post("/getById", body);
-      console.log(friends);
-      //console.log(friends.data.friendsCollection[0]);
       bodytwo = friends.data.friendsCollection;
-      console.log(bodytwo);
-      //let arr = [];
 
       for (let index = 0; index < bodytwo.length; index++) {
         const element = bodytwo[index];
@@ -52,9 +43,7 @@ function MakeFriends() {
       let uniqueObjArray = [
         ...new Map(arr.map((item) => [item["_id"], item])).values(),
       ];
-      console.log(uniqueObjArray);
       const newSet = [...new Set(arr)];
-      console.log(newSet);
       setFriendList(uniqueObjArray);
     };
 
@@ -74,8 +63,6 @@ function MakeFriends() {
     };
     const getAll = async () => {
       const response = await groupApi.get("/getAll");
-      console.log("hy");
-      console.log(response.data);
       let body = response.data;
       for (let index = 0; index < body.length; index++) {
         const elements = body[index];
@@ -85,9 +72,7 @@ function MakeFriends() {
         let bod = { id: elements };
         for (let index = 0; index < secendBody.length; index++) {
           const element = secendBody[index];
-          console.log(element);
           if (res.id == element) {
-            setDisable(true);
           }
         }
 
@@ -95,7 +80,6 @@ function MakeFriends() {
 
         if (group != null) arry.push(group.data);
       }
-      console.log(arry._id);
       setGroupList(arry);
     };
 
@@ -147,82 +131,84 @@ function MakeFriends() {
 
   return (
     <div>
-    <div className="containers">
-      <div>
-        <label>add new friends</label>
-        <input
-          type="text"
-          onChange={(event) => {
-            setSearch(event.target.value);
-          }}
-          placeholder="find some one"
-        />
-        {userList
-          .filter((item) => {
-            if (search == "") {
-              return item;
-            } else if (
-              item.userName.toLowerCase().includes(search.toLowerCase())
-            ) {
-              return item;
-            }
-          })
-          .map((item, index) => {
+      <div className="containers">
+        <div>
+          <label>add new friends</label>
+          <input
+            type="text"
+            onChange={(event) => {
+              setSearch(event.target.value);
+            }}
+            placeholder="find some one"
+          />
+          {userList
+            .filter((item) => {
+              if (search == "") {
+                return item;
+              } else if (
+                item.userName.toLowerCase().includes(search.toLowerCase())
+              ) {
+                return item;
+              }
+            })
+            .map((item, index) => {
+              return (
+                <div key={index}>
+                  <h4>name: {item.userName}</h4>
+                  <h4>email: {item.emailAdress}</h4>
+                  <button onClick={() => addFriend(item._id)}>add</button>
+                </div>
+              );
+            })}
+        </div>
+
+        <div className="chaild">
+          <label>your friends</label>
+          <input
+            type="text"
+            onChange={(event) => {
+              setFriendssearch(event.target.value);
+            }}
+            placeholder="find some one"
+          />
+          {friendList
+            .filter((item) => {
+              if (friendssearch == "") {
+                return item;
+              } else if (
+                item.userName
+                  .toLowerCase()
+                  .includes(friendssearch.toLowerCase())
+              ) {
+                return item;
+              }
+            })
+
+            .map((item, index) => {
+              return (
+                <div key={index}>
+                  <h4>name: {item.userName}</h4>
+                  <h4>email: {item.emailAdress}</h4>
+                  <button onClick={() => deleteFriends(item._id)}>
+                    remove
+                  </button>
+                </div>
+              );
+            })}
+        </div>
+
+        <div className="chaild">
+          <label>groups</label>
+          {groupList.map((item, index) => {
             return (
               <div key={index}>
-                <h4>name: {item.userName}</h4>
-                <h4>email: {item.emailAdress}</h4>
-                <button onClick={() => addFriend(item._id)}>add</button>
+                <h4>group name: {item.groupName}</h4>
+                <button onClick={() => addGroup(item._id)}>add</button>
               </div>
             );
           })}
+        </div>
       </div>
-
-      <div className="chaild">
-        <label>your friends</label>
-        <input
-          type="text"
-          onChange={(event) => {
-            setFriendssearch(event.target.value);
-          }}
-          placeholder="find some one"
-        />
-        {friendList
-          .filter((item) => {
-            if (friendssearch == "") {
-              return item;
-            } else if (
-              item.userName.toLowerCase().includes(friendssearch.toLowerCase())
-            ) {
-              return item;
-            }
-          })
-
-          .map((item, index) => {
-            return (
-              <div key={index}>
-                <h4>name: {item.userName}</h4>
-                <h4>email: {item.emailAdress}</h4>
-                <button onClick={() => deleteFriends(item._id)}>remove</button>
-              </div>
-            );
-          })}
-      </div>
-
-      <div className="chaild">
-        <label>groups</label>
-        {groupList.map((item, index) => {
-          return (
-            <div key={index}>
-              <h4>group name: {item.groupName}</h4>
-              <button disabled={disable} onClick={() => addGroup(item._id)}>
-                add
-              </button>
-            </div>
-          );
-        })}
-      </div>
-    </div>
     </div>
   );
 }
